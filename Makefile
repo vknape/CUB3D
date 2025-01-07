@@ -1,29 +1,38 @@
 NAME		=		cub3D
-SRC			=		main.c
+SRC			=		clean.c\
+					init.c\
+					main.c
 OBJ			=		$(SRC:.c=.o)
 CC			=		cc
 FLAGS		=		-Wall -Wextra -Werror -g
 # FLAGS		+=		-fsanitize=thread
 # FLAGS		+=		-fsanitize=address
 MLX42		=		MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+LIBFT 		=		./libft/libft.a
 ARGS		=		
 
 all:	libmlx	$(NAME)
 
 libmlx:
-	@cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
+	cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
 
-$(NAME):	$(OBJ)
-				$(CC) $(FLAGS) $(MLX42) -o $(NAME) $(OBJ)
+$(LIBFT):
+	make -C ./libft
+
+$(NAME):	$(OBJ) $(LIBFT) 
+				$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX42)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 				@rm -f $(OBJ)
+				@make clean -C ./libft
+				# @rm -rf ./MLX42/build
 
 fclean:		clean
 				@rm -f $(NAME)
+				@make fclean -C ./libft
 
 re:			fclean all
 
@@ -33,4 +42,4 @@ run:		all
 #				@valgrind --leak-check=full ./$(NAME) $(ARGS)
 
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re libmlx
