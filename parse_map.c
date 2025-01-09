@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
+/*   parse_map.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/01/07 13:11:12 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/09 15:35:32 by snijhuis      ########   odam.nl         */
+/*   Created: 2025/01/09 15:10:36 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/01/09 15:35:27 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_struct(t_all **all)
+void	parse_map(t_all *all)
 {
-	(*all) = ft_calloc(1, sizeof(t_all));
-	if (!(*all))
-		exit(-1);
-	(*all)->parse = ft_calloc(1, sizeof(t_parse));
-	if (!(*all)->parse)
-		clean_all((*all), 0);
-	(*all)->game = ft_calloc(1, sizeof(t_parse));
-	if (!(*all)->game)
-		clean_all((*all), 0);
+	int i;
+
+	// check end of 2darray doesn't segfault
+	all->parse->map = ft_calloc(all->parse->map_height + 1, sizeof(char *));
+	if (!all->parse->map)
+		clean_all(all, 1);
+	i = 0;
+	while (i < all->parse->map_height)
+	{
+		all->parse->map[i] = ft_calloc(all->parse->map_width + 1, sizeof(char));
+		if (!all->parse->map[i])
+			clean_all(all, 1);
+		i++;
+	}
+	return ;
 }

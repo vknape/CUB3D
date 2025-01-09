@@ -1,7 +1,13 @@
 NAME		=		cub3D
 SRC			=		clean.c\
+					get_next_line_utils.c\
+					get_next_line.c\
 					init.c\
-					main.c
+					main.c\
+					parsing.c\
+					utils.c\
+					verify_cub.c\
+					parse_map.c
 OBJ			=		$(SRC:.c=.o)
 CC			=		cc
 FLAGS		=		-Wall -Wextra -Werror -g
