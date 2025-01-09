@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 10:57:46 by vknape            #+#    #+#             */
-/*   Updated: 2023/11/30 09:09:42 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line_utils.c                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/06 10:57:46 by vknape        #+#    #+#                 */
+/*   Updated: 2025/01/09 15:35:39 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *c)
+size_t	ft_strlen_gnl(const char *c)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *c)
 	return (i);
 }
 
-int	ft_strlcpy(char *dst, const char *src, size_t size)
+int	ft_strlcpy_gnl(char *dst, const char *src, size_t size)
 {
 	int	i;
 
@@ -49,25 +49,26 @@ int	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*new;
 	int		i;
 
 	i = 0;
 	if (s1)
-		i = ft_strlen(s1);
-	new = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+		i = ft_strlen_gnl(s1);
+	new = (char *)malloc((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1)
+			* sizeof(char));
 	if (new == NULL)
 		return (free_all(&s1));
 	if (s1)
-		ft_strlcpy(new, s1, ft_strlen(s1) + 1);
-	ft_strlcpy(&new[i], s2, ft_strlen(s2) + 1);
+		ft_strlcpy_gnl(new, s1, ft_strlen_gnl(s1) + 1);
+	ft_strlcpy_gnl(&new[i], s2, ft_strlen_gnl(s2) + 1);
 	free_all(&s1);
 	return (new);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr_gnl(const char *s, int c)
 {
 	unsigned int	i;
 

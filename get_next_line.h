@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 10:57:49 by vknape            #+#    #+#             */
-/*   Updated: 2023/12/04 09:11:00 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line.h                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/06 10:57:49 by vknape        #+#    #+#                 */
+/*   Updated: 2025/01/09 13:33:39 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_strchr(const char *s, int c);
-int		ft_strlcpy(char *dst, const char *src, size_t size);
-size_t	ft_strlen(const char *c);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+int		ft_strchr_gnl(const char *s, int c);
+int		ft_strlcpy_gnl(char *dst, const char *src, size_t size);
+size_t	ft_strlen_gnl(const char *c);
 char	*free_all(char **s);
 
 #endif

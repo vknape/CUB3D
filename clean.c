@@ -6,22 +6,22 @@
 /*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 14:25:38 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/07 14:51:23 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/01/09 15:35:42 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void clean_all(t_all *all)
+void	clean_all(t_all *all, int status)
 {
-    int status;
-
-    status = all->status;
-    if (all->parse)
-        free(all->parse);
-    if (all->game)
-        free(all->game);
-    if (all)
-        free(all);
-    exit(status);
+	printf("map height %d\n", all->parse->map_height);
+	printf("map width: %d\n", all->parse->map_width);
+	if (all->parse)
+		free(all->parse);
+	if (all->game)
+		free(all->game);
+	if (all)
+		free(all);
+	printf("exit %d\n", status);
+	exit(status);
 }

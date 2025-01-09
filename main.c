@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 13:43:26 by vknape            #+#    #+#             */
-/*   Updated: 2025/01/08 12:01:17 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
+/*   Updated: 2025/01/09 15:35:29 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void	ft_hook(void *param)
 
 void	start_game(t_all *all)
 {
-
 	all->game->window = mlx_init(1024, 1024, "cub3D", 1);
 	if (!all->game->window)
-		clean_all(all);
-	mlx_loop_hook(all->game->window, ft_hook, all);
+		clean_all(all, 0);
+	// mlx_loop_hook(all->game->window, ft_hook, all);
 	mlx_loop(all->game->window);
 	(void)all;
 	return ;
