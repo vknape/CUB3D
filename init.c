@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/07 13:11:12 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/09 15:35:32 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 13:11:12 by snijhuis          #+#    #+#             */
+/*   Updated: 2025/01/13 10:58:29 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+//Allocates memory and sets everything to 0
 
 void	init_struct(t_all **all)
 {

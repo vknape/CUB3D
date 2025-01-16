@@ -1,0 +1,53 @@
+cub3d
+
+git notes:
+
+
+
+git actions
+
+git reset --hard source-branch
+
+git stash
+
+git stash list
+
+git stash apply (stash komt terug)
+
+git stash pop (stash komt terug en stash word geleegd. )
+
+git checkout <commit-hash>
+
+git reset --hard <commit-hash>
+
+
+
+
+
+
+//wat is check_element_other in return binnen check_element1
+//waarom moet all->parse->count 6 zijn in check_file en wat staat in count? + waarom naar NULL zetten?
+//kunnen we strtrm gebruiken om de path direct goed erin te zetten ?
+
+//TO DO VOOR DE MAP:
+//check dat een N, S, E of W bestaat. 
+//check dat er niet meerdere van bestaan (N, S, E, W)
+//check alle begin punten of de string (vanaf eerste character) en de laatste van de string een 1 is.
+//eerste en laatste rij moeten allemaal 1 zijn.
+//de 1 moet beginnen voor de open spaces. dus niet later in de string, dan is de map niet gesloten. 
+
+
+check dat de input file van map .cub file is
+
+load png file with mlx_load_png to check non-png
+
+
+
+//TO DO na parsen
+//colours van decimaal naar hexidecimaal omzetten.
+//raycasting begrijpen https://www.youtube.com/watch?v=gYRrGTC7GtA https://www.youtube.com/watch?v=gYRrGTC7GtA&list=PLCWsH9Tj9oWyDM4W43VMj5yo2PdyYMGst
+//keyboard/ (muis) input oppakken
+//textures weergeven
+
+//clean all blijven updaten
+//error erno aanmaken en error functie in clean all zetten.
