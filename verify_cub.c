@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   verify_cub.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/09 15:01:07 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/09 15:35:17 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   verify_cub.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 15:01:07 by snijhuis          #+#    #+#             */
+/*   Updated: 2025/01/16 14:46:07 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+//Calculate map width and height and check if the lines after the map
+//are valid
 
 void	verify_map(t_all *all)
 {
@@ -27,16 +30,18 @@ void	verify_map(t_all *all)
 			clean_all(all, 9);
 		else
 			all->parse->map_start++;
-		all->parse->line = get_next_line(all->parse->fd);
+		free(all->parse->line);
+		all->parse->line = get_next_line(all->parse->fd_cub);
 	}
 	printf("map start %d\n", all->parse->map_start);
 	printf("map height %d\n", all->parse->map_height);
 	printf("map width: %d\n", all->parse->map_width);
 }
+//Check for invalid characters in map and save player orientation
 
 void	check_invalid(t_all *all)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (all->parse->line[i])
@@ -45,7 +50,73 @@ void	check_invalid(t_all *all)
 			clean_all(all, 8);
 		if (all->parse->line[i] == 'N' || all->parse->line[i] == 'S'
 			|| all->parse->line[i] == 'W' || all->parse->line[i] == 'E')
+		{
+			if (all->parse->orientation != 0)
+			{
+				printf("wrong\n");
+				clean_all(all, 0);
+			}
 			all->parse->orientation = all->parse->line[i];
+		}
 		i++;
 	}
+}
+
+//Trims edges off texture path and tries loading to see if valid
+
+void check_texture(t_all *all)
+{
+	trim_texture(all);
+	all->game->north = mlx_load_png(all->parse->north);
+	if (!all->game->north)
+		clean_all(all, 12);
+	all->game->south = mlx_load_png(all->parse->south);
+	if (!all->game->south)
+		clean_all(all, 12);
+	all->game->east = mlx_load_png(all->parse->east);
+	if (!all->game->east)
+		clean_all(all, 12);
+	all->game->west = mlx_load_png(all->parse->west);
+	if (!all->game->west)
+		clean_all(all, 12);
+
+}
+
+
+void trim_texture(t_all *all)
+{
+	char *temp;
+
+	temp = all->parse->north;
+	all->parse->north = ft_strtrim(all->parse->north + 2, " \n");
+	free(temp);
+	if (!all->parse->north)
+		clean_all(all, 0);
+	temp = all->parse->south;
+	all->parse->south = ft_strtrim(all->parse->south + 2, " \n");
+	free(temp);
+	if (!all->parse->south)
+		clean_all(all, 0);
+	temp = all->parse->east;
+	all->parse->east = ft_strtrim(all->parse->east + 2, " \n");
+	free(temp);
+	if (!all->parse->east)
+		clean_all(all, 0);
+	temp = all->parse->west;
+	all->parse->west = ft_strtrim(all->parse->west + 2, " \n");
+	free(temp);
+	if (!all->parse->west)
+		clean_all(all, 0);
+}
+
+void check_colour(t_all *all)
+{
+	char *temp;
+
+	temp = all->parse->ceiling;
+	all->parse->ceiling = ft_strtrim(all->parse->ceiling, "C \n");
+	free(temp);	
+	temp = all->parse->floor;
+	all->parse->floor = ft_strtrim(all->parse->floor, "F \n");
+	free(temp);
 }

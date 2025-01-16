@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/01/09 15:32:31 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
+/*   Updated: 2025/01/16 13:42:22 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,27 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+enum e_elem
+{
+    wall = '1',
+    ground = '0',
+    space = '_'
+};
+
+
 typedef struct s_game
 {
     mlx_t   *window;
+    mlx_image_t *image;
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+    mlx_texture_t *west;
+    mlx_texture_t *east;
 }           t_game;
 
 typedef struct s_parse
 {
-    int     fd;
+    int     fd_cub;
     char    *line;
     int     count;
     int     player_count;
@@ -43,6 +56,8 @@ typedef struct s_parse
     char    orientation;
     char    **map;
     int     map_start;
+    int     player_x;
+    int     player_y;
     
 }			t_parse;
 
@@ -65,5 +80,16 @@ void    verify_map(t_all *all);
 int	custom_strlen(char *str);
 void	check_invalid(t_all *all);
 void parse_map(t_all *all);
+void    read_map(t_all *all);
+void    fill_row(t_all *all, int j);
+void    check_map_boundaries(t_all *all);
+void	check_map_row(t_all *all, int j);
+void	check_map_column(t_all *all, int i);
+void	clean_parse(t_all *all);
+void	empty_buffer(t_all *all);
+void    check_colour(t_all *all);
+void    check_texture(t_all *all);
+void trim_texture(t_all *all);
+
 
 #endif

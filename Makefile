@@ -4,6 +4,7 @@ SRC			=		clean.c\
 					get_next_line.c\
 					init.c\
 					main.c\
+					map_boundaries.c\
 					parsing.c\
 					utils.c\
 					verify_cub.c\
@@ -41,6 +42,7 @@ fclean:		clean
 				@make fclean -C ./libft
 
 re:			fclean all
+				make clean
 
 run:		all
 				@./$(NAME) $(ARGS)
