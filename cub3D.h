@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/01/16 13:42:22 by vknape           ###   ########.fr       */
+/*   Updated: 2025/01/20 15:40:02 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+
+#define WINDOW_X 1920
+#define WINDOW_Y 1080
+#define pi  3.141592653589793
+#define fov pi/2
 
 enum e_elem
 {
@@ -37,6 +42,13 @@ typedef struct s_game
     mlx_texture_t *south;
     mlx_texture_t *west;
     mlx_texture_t *east;
+    int     img_width;
+    int     img_height;
+    double  px;
+    double  py;
+    double  p_or;
+    double  dirx;
+    double  diry;
 }           t_game;
 
 typedef struct s_parse
@@ -90,6 +102,7 @@ void	empty_buffer(t_all *all);
 void    check_colour(t_all *all);
 void    check_texture(t_all *all);
 void trim_texture(t_all *all);
+void	draw_ray(t_all *all);
 
 
 #endif

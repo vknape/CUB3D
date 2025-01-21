@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:06:42 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/16 14:46:43 by vknape           ###   ########.fr       */
+/*   Updated: 2025/01/20 15:01:31 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,17 @@ void	parse(t_all *all, char **argv)
 	if (close(all->parse->fd_cub) == -1)
 		clean_all(all, 0);
 	check_map_boundaries(all);
-	all->parse->map[all->parse->player_y][all->parse->player_x] = all->parse->orientation;
+	// all->parse->map[all->parse->player_y][all->parse->player_x] = all->parse->orientation;
+	all->game->px = all->parse->player_x * 50;
+	all->game->py = all->parse->player_y * 50;
+	if (all->parse->orientation == 'E')
+		all->game->p_or = 0;
+	if (all->parse->orientation == 'N')
+		all->game->p_or = 0.5 * pi;
+	if (all->parse->orientation == 'W')
+		all->game->p_or = pi;
+	if (all->parse->orientation == 'S')
+		all->game->p_or = 1.5 * pi;
 }
 
 //Iterates over each line in the file until all elements have been found
