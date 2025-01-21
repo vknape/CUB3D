@@ -8,7 +8,9 @@ SRC			=		clean.c\
 					parsing.c\
 					utils.c\
 					verify_cub.c\
-					parse_map.c
+					parse_map.c\
+					put_pixel.c\
+					raycasting.c
 OBJ			=		$(SRC:.c=.o)
 CC			=		cc
 FLAGS		=		-Wall -Wextra -Werror -g
@@ -35,7 +37,7 @@ $(NAME):	$(OBJ) $(LIBFT)
 clean:
 				@rm -f $(OBJ)
 				@make clean -C ./libft
-				# @rm -rf ./MLX42/build
+				#@rm -rf ./MLX42/build
 
 fclean:		clean
 				@rm -f $(NAME)

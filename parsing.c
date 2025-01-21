@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 13:06:42 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/20 15:01:31 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parsing.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/07 13:06:42 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/01/21 15:43:29 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	parse(t_all *all, char **argv)
 		clean_all(all, 0);
 	check_map_boundaries(all);
 	// all->parse->map[all->parse->player_y][all->parse->player_x] = all->parse->orientation;
-	all->game->px = all->parse->player_x * 50;
-	all->game->py = all->parse->player_y * 50;
+	all->game->px = all->parse->player_x += 1 / 4;
+	all->game->py = all->parse->player_y += 1 / 4;
 	if (all->parse->orientation == 'E')
 		all->game->p_or = 0;
 	if (all->parse->orientation == 'N')

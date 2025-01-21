@@ -51,3 +51,7 @@ load png file with mlx_load_png to check non-png
 
 //clean all blijven updaten
 //error erno aanmaken en error functie in clean all zetten.
+
+//blokje tekenen vanaf een middelpunt. 
+//richting * stapgrote coordinat check of dat een muur is of niet. 
+//mocht dit binnen een muur vallen, beweeg niet. 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/01/20 15:40:02 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
+/*   Updated: 2025/01/21 14:56:24 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #define WINDOW_Y 1080
 #define pi  3.141592653589793
 #define fov pi/2
+#define BLOCK 50
 
 enum e_elem
 {
@@ -91,7 +92,7 @@ int element_found(t_all *all);
 void    verify_map(t_all *all);
 int	custom_strlen(char *str);
 void	check_invalid(t_all *all);
-void parse_map(t_all *all);
+void    parse_map(t_all *all);
 void    read_map(t_all *all);
 void    fill_row(t_all *all, int j);
 void    check_map_boundaries(t_all *all);
@@ -101,8 +102,11 @@ void	clean_parse(t_all *all);
 void	empty_buffer(t_all *all);
 void    check_colour(t_all *all);
 void    check_texture(t_all *all);
-void trim_texture(t_all *all);
+void    trim_texture(t_all *all);
 void	draw_ray(t_all *all);
-
+void	ft_raydir(void *param);
+void	ft_keys(void *param);
+void	ft_hook(void *param);
+void	wall_collision(t_all *all, char or);
 
 #endif
