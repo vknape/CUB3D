@@ -6,7 +6,7 @@
 /*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/21 15:05:43 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/01/23 15:40:29 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,18 @@ void	ft_raydir(void *param)
 
 void	draw_ray(t_all *all)
 {
-		int	i;
+	int	i;
 	double	x;
 	double	y;
 
 	// printf("%f\n", all->game->dirx);
 	// printf("%f\n", all->game->diry);
 	i = 0;
+	ray_end(all);
 	while (i < 200)
 	{
 		// printf("%f\n", all->game->p_or);
-		x = all->game->px * BLOCK + (all->game->dirx * i) + 12;
+		x = all->game->px * BLOCK + (all->game->dirx * i);
 		y = all->game->py * BLOCK + (all->game->diry * i);
 		// printf("%f\n", all->game->px);
 		// printf("%f\n", all->game->py);
@@ -68,3 +69,51 @@ void	draw_ray(t_all *all)
 	// while (1)
 	// ;
 }
+
+void ray_end(t_all *all)
+{
+	double x;
+	double y;
+	double slope;
+	double step_size;
+
+	step_size = 1.0 / all->game->dirx;
+	x = all->game->px;
+	y = all->game->py;
+	slope = all->game->dirx / all->game->diry;
+	while(1)
+	{
+		
+		x = floor(all->game->px);
+		y = floor(all->game->py);
+		if (all->parse->map[(int)y][(int)x] == wall)
+			break;	
+	}
+}
+
+// void wall_collision(t_all *all)
+// {
+// 	double x;
+// 	double y;
+// 	double xnew;
+// 	double ynew;
+// 	// int		index;
+
+// 	all->game->dirx = cos(all->game->p_or);
+// 	all->game->diry = -sin(all->game->p_or);
+
+// 	x = all->game->px * BLOCK;
+// 	y = all->game->py * BLOCK;
+// 	xnew = x + (all->game->dirx * STEP * BLOCK);
+// 	ynew = y + (all->game->diry * STEP * BLOCK);
+// 	printf("xnew: %f\n", xnew);
+// 	printf("ynew: %f\n", ynew);
+
+// 	x = floor(xnew / BLOCK);
+// 	y = floor(ynew / BLOCK);
+// 	if (all->parse->map[(int)y][(int)x] != wall)
+// 	{
+// 		all->game->px = xnew / BLOCK;
+// 		all->game->py = ynew / BLOCK;
+// 	}
+// }

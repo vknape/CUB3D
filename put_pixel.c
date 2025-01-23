@@ -6,7 +6,7 @@
 /*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:24:06 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/21 15:04:37 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/01/23 11:52:39 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	ft_hook(void *param)
 	}
 	i = 0;
 	j = 0;
-	while (j < 25)
+	while (j < 24)
 	{
-		while (i < 25)
+		while (i < 24)
 		{
-			mlx_put_pixel(all->game->image, all->game->px * BLOCK + i, all->game->py * BLOCK + j, 0xFF0000FF);
+			mlx_put_pixel(all->game->image, all->game->px * BLOCK + i - 12, all->game->py * BLOCK + j - 12, 0xFF0000FF);
 			i++;
 		}
 		i = 0;

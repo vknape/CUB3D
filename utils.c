@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/09 13:00:10 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/21 15:44:07 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/01/23 14:01:08 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,56 +44,95 @@ void	ft_keys(void *param)
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_W))
 	{
-		all->game->py -= 5.0 / BLOCK;
-		wall_collision(all, 'W');
+		// all->game->py -= 5.0 / BLOCK;
+		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_S))
 	{
-		all->game->py += 5.0 / BLOCK;
-		wall_collision(all, 'S');
+		// all->game->py += 5.0 / BLOCK;
+		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_A))
 	{
-		all->game->px -= 5.0 / BLOCK;
-		wall_collision(all, 'A');
+		// all->game->px -= 5.0 / BLOCK;
+		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_D))
 	{
-		all->game->px += 5.0 / BLOCK;
-		wall_collision(all, 'D');
+		// all->game->px += 5.0 / BLOCK;
+		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_LEFT))
-		all->game->p_or += (pi / 90);
+		all->game->p_or += (pi / 45);
 	if (mlx_is_key_down(all->game->window, MLX_KEY_RIGHT))
-		all->game->p_or -= (pi / 90);
+		all->game->p_or -= (pi / 45);
 
-	
-		//kan eruit
-	if (all->game->py < 0)
-		all->game->py = 0;
-	if (all->game->py > all->parse->map_height)
-		all->game->py = all->parse->map_height - BLOCK / 100;
-	if (all->game->px < 0)
-		all->game->px = 0;
-	if (all->game->px > all->parse->map_width)
-		all->game->px = all->parse->map_width - BLOCK / 100;
 	while (all->game->p_or < 0)
 		all->game->p_or += 2 * pi;
 	if (all->game->p_or > 2 * pi)
 		all->game->p_or = fmod(all->game->p_or, 2 * pi);
-}
-void wall_collision(t_all *all, char or)
+	
+		//kan eruit
+	// if (all->game->py < 0)
+	// 	all->game->py = 0;
+	// if (all->game->py > all->parse->map_height)
+	// 	all->game->py = all->parse->map_height - BLOCK / 100;
+	// if (all->game->px < 0)
+	// 	all->game->px = 0;
+	// if (all->game->px > all->parse->map_width)
+	// 	all->game->px = all->parse->map_width - BLOCK / 100;
+} 
+void wall_collision(t_all *all)
 {
-	if (or == 'W' && all->parse->map[(int)floor(all->game->py)][(int)floor(all->game->px)] == wall)
+	double x;
+	double y;
+	double xnew;
+	double ynew;
+	// int		index;
+
+	all->game->dirx = cos(all->game->p_or);
+	all->game->diry = -sin(all->game->p_or);
+
+	x = all->game->px * BLOCK;
+	y = all->game->py * BLOCK;
+	xnew = x + (all->game->dirx * STEP * BLOCK);
+	ynew = y + (all->game->diry * STEP * BLOCK);
+	printf("xnew: %f\n", xnew);
+	printf("ynew: %f\n", ynew);
+
+	x = floor(xnew / BLOCK);
+	y = floor(ynew / BLOCK);
+	if (all->parse->map[(int)y][(int)x] != wall)
 	{
-		// printf("yw = %d\n", y);
-		all->game->py = ceil(all->game->py);
+		all->game->px = xnew / BLOCK;
+		all->game->py = ynew / BLOCK;
 	}
-	if (or == 'S' && all->parse->map[(int)ceil(all->game->py)][(int)floor(all->game->px)] == wall)
-	{
-		// printf("yw = %d\n", y);
-		all->game->py = ceil(all->game->py);
-	}
+
+	
+}
+
+// void	ft_raydir(void *param)
+// {
+// 	t_all	*all;
+// 	double	dir;
+// 	int		i;
+	
+// 	all = param;
+// 	dir = all->game->p_or - fov / 2;
+// 	i = 0;
+// 	while (i < 360)
+// 	{
+// 		dir += fov / 360;
+// 		all->game->dirx = cos(dir);
+// 		all->game->diry = -sin(dir);
+// 		draw_ray(all);
+// 		i++;
+// 	}
+	
+// }
+
+
+
 
 
 
@@ -110,7 +149,7 @@ void wall_collision(t_all *all, char or)
 // 	// 	all->game->px = x * 50;
 // 	// if(or == 'D')
 // 	// 	all->game->px = x * 50 - 25;
-}
+
 
 
 // void	wall_collision(t_all *all, char or)

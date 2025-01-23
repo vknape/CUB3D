@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 13:06:42 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/21 15:43:29 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/01/23 11:49:29 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	parse(t_all *all, char **argv)
 		clean_all(all, 0);
 	check_map_boundaries(all);
 	// all->parse->map[all->parse->player_y][all->parse->player_x] = all->parse->orientation;
-	all->game->px = all->parse->player_x += 1 / 4;
-	all->game->py = all->parse->player_y += 1 / 4;
+	all->game->px = (double)all->parse->player_x + (1.0 / 4.0);
+	printf("px %f\n", all->game->px);
+	all->game->py = (all->parse->player_y + 0.25);
+	printf("py %f\n", all->game->py);
 	if (all->parse->orientation == 'E')
 		all->game->p_or = 0;
 	if (all->parse->orientation == 'N')
