@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   raycasting.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/23 15:40:29 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 13:19:14 by snijhuis          #+#    #+#             */
+/*   Updated: 2025/01/27 15:33:22 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_raydir(void *param)
 	all = param;
 	dir = all->game->p_or - fov / 2;
 	i = 0;
-	while (i < 360)
+	while (i < 90)
 	{
-		dir += fov / 360;
+		dir += fov / 90;
 		all->game->dirx = cos(dir);
 		all->game->diry = -sin(dir);
 		draw_ray(all);
@@ -42,7 +42,7 @@ void	draw_ray(t_all *all)
 	// printf("%f\n", all->game->dirx);
 	// printf("%f\n", all->game->diry);
 	i = 0;
-	ray_end(all);
+	ray_end_y(all);
 	while (i < 200)
 	{
 		// printf("%f\n", all->game->p_or);
@@ -70,24 +70,90 @@ void	draw_ray(t_all *all)
 	// ;
 }
 
-void ray_end(t_all *all)
+void ray_end_x(t_all *all)
 {
-	double x;
-	double y;
-	double slope;
-	double step_size;
+	double	x;
+	double	y;
+	double	ray;
+	double	or;
 
-	step_size = 1.0 / all->game->dirx;
-	x = all->game->px;
+	x = fmod(all->game->px, 1.0);
 	y = all->game->py;
-	slope = all->game->dirx / all->game->diry;
-	while(1)
+	x = 1 - x;
+	or = all->game->p_or;
+	if (or > pi)
+		or = (2 * pi) - or;
+	// y = 1 - y;
+	ray = x / cos(or);
+	y += tan(or) * x;
+	x = ceil(x) + floor(all->game->px);
+	if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
 	{
-		
-		x = floor(all->game->px);
-		y = floor(all->game->py);
-		if (all->parse->map[(int)y][(int)x] == wall)
-			break;	
+		// printf("x = %f\n", floor(x));
+		// printf("y = %f\n", floor(y));
+		// printf("ray = %f\n\n", ray);
+		return ;
+	}
+	while (1)
+	{
+		x++;
+		ray += (1 / cos(or));
+		y += tan(or);
+		if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
+		{
+			// printf("x = %f\n", floor(x));
+			// printf("y = %f\n", floor(y));
+			// printf("ray = %f\n\n", ray);
+			break ;
+		}
+	}
+	
+}
+
+void ray_end_y(t_all *all)
+{
+	double	x;
+	double	y;
+	double	ray;
+	double	or;
+
+	y = fmod(all->game->py, 1.0);
+	x = all->game->px;
+	y = 1 - y;
+	or = all->game->p_or;
+	if (or > pi)
+		or = (2 * pi) - or;
+	// y = 1 - y;
+	if (or == 0)
+		return ;
+	ray = y / sin(or);
+	x += y / tan(or);
+	y = ceil(y) + floor(all->game->py);
+	printf("x = %f\n", floor(x));
+	printf("y = %f\n", floor(y));
+	printf("ray = %f\n\n", ray);
+	if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
+	{
+		printf("x = %f\n", floor(x));
+		printf("y = %f\n", floor(y));
+		printf("ray = %f\n\n", ray);
+		return ;
+	}
+	while (1)
+	{
+		y++;
+		ray += (1 / sin(or));
+		x += y / tan(or);
+		printf("x = %f\n", floor(x));
+		printf("y = %f\n", floor(y));
+		printf("ray = %f\n\n", ray);
+		if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
+		{
+			printf("x = %f\n", floor(x));
+			printf("y = %f\n", floor(y));
+			printf("ray = %f\n\n", ray);
+			break ;
+		}
 	}
 }
 

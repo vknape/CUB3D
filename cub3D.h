@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/01/23 14:02:12 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
+/*   Updated: 2025/01/27 15:46:46 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void				ft_raydir(void *param);
 void				ft_keys(void *param);
 void				ft_hook(void *param);
 void				wall_collision(t_all *all);
-void				ray_end(t_all *all);
+void				ray_end_x(t_all *all);
+void 				ray_end_y(t_all *all);
 
 #endif
