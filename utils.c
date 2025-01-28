@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/09 13:00:10 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/23 14:01:08 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 13:00:10 by snijhuis          #+#    #+#             */
+/*   Updated: 2025/01/28 15:12:46 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	ft_keys(void *param)
 		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_LEFT))
-		all->game->p_or += (pi / 45);
+		all->game->p_or += (pi / 90);
 	if (mlx_is_key_down(all->game->window, MLX_KEY_RIGHT))
-		all->game->p_or -= (pi / 45);
+		all->game->p_or -= (pi / 90);
 
 	while (all->game->p_or < 0)
 		all->game->p_or += 2 * pi;

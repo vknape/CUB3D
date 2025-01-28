@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/01/27 15:46:46 by vknape           ###   ########.fr       */
+/*   Updated: 2025/01/28 14:30:34 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,20 @@ typedef struct s_parse
 
 }					t_parse;
 
+typedef struct s_ray
+{
+	double	ray_x;
+	double	ray_y;
+	double	ray_length;
+	bool	valid_ray;
+}			t_ray;
+
 typedef struct s_all
 {
 	int				status;
 	t_parse			*parse;
 	t_game			*game;
+	t_ray			*ray;
 }					t_all;
 
 void				init_struct(t_all **all);
@@ -110,5 +119,10 @@ void				ft_hook(void *param);
 void				wall_collision(t_all *all);
 void				ray_end_x(t_all *all);
 void 				ray_end_y(t_all *all);
+void				ray_end_xpos(t_all *all);
+void				ray_end_ypos(t_all *all);
+void				ray_end_xneg(t_all *all);
+void				ray_end_yneg(t_all *all);
+void				posy_posx(t_all *all);
 
 #endif
