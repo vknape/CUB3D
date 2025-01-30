@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/01/28 14:30:34 by vknape           ###   ########.fr       */
+/*   Updated: 2025/01/30 13:56:07 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_ray
 	double	ray_y;
 	double	ray_length;
 	bool	valid_ray;
+	bool	xneg;
+	bool	yneg;
 }			t_ray;
 
 typedef struct s_all
