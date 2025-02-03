@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/01/30 13:56:07 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
+/*   Updated: 2025/02/03 15:08:46 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ typedef struct s_ray
 {
 	double	ray_x;
 	double	ray_y;
+	double 	calc_x;
+	double  calc_y;
+	double  calc_or;
+	double 	calc_ray;
 	double	ray_length;
 	bool	valid_ray;
 	bool	xneg;
@@ -126,5 +130,6 @@ void				ray_end_ypos(t_all *all);
 void				ray_end_xneg(t_all *all);
 void				ray_end_yneg(t_all *all);
 void				posy_posx(t_all *all);
+void				assign_ray(t_all *all, int id);
 
 #endif

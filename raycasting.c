@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/03 14:37:17 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/03 15:13:18 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,114 +74,59 @@ void	posy_posx(t_all *all)
 
 void ray_end_xpos(t_all *all)
 {
-	double	x;
-	double	y;
-	double	ray;
-	double	or;
-
+	all->ray->calc_x = fmod(all->game->px, 1.0);
+	all->ray->calc_y = all->game->py;
+	if (!all->ray->xneg)
+		all->ray->calc_x = 1 - all->ray->calc_x;
+	all->ray->calc_or = all->game->p_or;
+	if (all->ray->calc_or > pi)
+		all->ray->calc_or = (2 * pi) - all->ray->calc_or;
 	if (all->ray->xneg)
-	{
-		x = fmod(all->game->px, 1.0);
-		y = all->game->py;
-		or = all->game->p_or;
-		if (or > pi)
-			or = (2 * pi) - or;
-		or = pi - or;
-		ray = x / cos(or);
-		if (all->ray->yneg)
-			y -= tan(or) * x;
-		else
-			y += tan(or) * x;
-		x = floor(all->game->px);
-		x -= 1;
-		if (x > all->parse->map_width || y > all->parse->map_height  || x < 0 || y < 0)
-		{
-			all->ray->valid_ray = false;
-			return ;
-		}
-		if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
-		{
-			all->ray->ray_x = x;
-			all->ray->ray_y = y;
-			all->ray->ray_length = ray;
-			all->ray->valid_ray = true;
-			return ;
-		}
-		while (1)
-		{
-			x--;
-			ray += (1 / cos(or));
-			if (all->ray->yneg)
-				y -= tan(or) * 1;
-			else
-				y += tan(or) * 1;
-			if (x >= all->parse->map_width || y >= all->parse->map_height || x < 0 || y < 0)
-			{
-				all->ray->valid_ray = false;
-				break ;
-			}
-			if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
-			{
-				all->ray->ray_x = x;
-				all->ray->ray_y = y;
-				all->ray->ray_length = ray;
-				all->ray->valid_ray = true;
-				break ;
-			}
-		}
-	}
+		all->ray->calc_or = pi - all->ray->calc_or;
+	all->ray->calc_ray = all->ray->calc_x / cos(all->ray->calc_or);
+	if (all->ray->yneg)
+		all->ray->calc_y -= tan(all->ray->calc_or) * all->ray->calc_x;
 	else
+		all->ray->calc_y += tan(all->ray->calc_or) * all->ray->calc_x;
+	if (all->ray->xneg)
+		all->ray->calc_x = floor(all->game->px) - 1;
+	else
+		all->ray->calc_x = floor(all->game->px) + 1;
+	if (all->ray->calc_x > all->parse->map_width || all->ray->calc_y > all->parse->map_height || all->ray->calc_x < 0 || all->ray->calc_y < 0)
+		return(assign_ray(all, 2));
+	if (all->parse->map[(int)floor(all->ray->calc_y)][(int)floor(all->ray->calc_x)] == wall)
+		return(assign_ray(all, 1));
+		
+	while (1)
 	{
-		x = fmod(all->game->px, 1.0);
-		y = all->game->py;
-		x = 1 - x;
-		or = all->game->p_or;
-		if (or > pi)
-			or = (2 * pi) - or;
-		if (or == 0.5 * pi)
-			return ;
-		ray = x / cos(or);
-		if (all->ray->yneg)
-			y -= tan(or) * x;
+		if (all->ray->xneg)
+			all->ray->calc_x--;
 		else
-			y += tan(or) * x;
-		x = ceil(x) + floor(all->game->px);
-		if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
-		{
-			all->ray->valid_ray = false;
-			return ;
-		}
-		if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
-		{
-			all->ray->ray_x = x;
-			all->ray->ray_y = y;
-			all->ray->ray_length = ray;
-			all->ray->valid_ray = true;
-			return ;
-		}
-		while (1)
-		{
-			x++;
-			ray += (1 / cos(or));
-			if (all->ray->yneg)
-				y -= tan(or) * 1;
-			else
-				y += tan(or) * 1;
-			if (x >= all->parse->map_width || y >= all->parse->map_height || x < 0 || y < 0)
-			{
-				all->ray->valid_ray = false;
-				break ;
-			}
-			if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
-			{
-				all->ray->ray_x = x;
-				all->ray->ray_y = y;
-				all->ray->ray_length = ray;
-				all->ray->valid_ray = true;
-				break ;
-			}
-		}
+			all->ray->calc_x++;
+		all->ray->calc_ray += (1 / cos(all->ray->calc_or));
+		if (all->ray->yneg)
+			all->ray->calc_y -= tan(all->ray->calc_or) * 1;
+		else
+			all->ray->calc_y += tan(all->ray->calc_or) * 1;
+		if (all->ray->calc_x >= all->parse->map_width || all->ray->calc_y >= all->parse->map_height || all->ray->calc_x < 0 || all->ray->calc_y < 0)
+			return(assign_ray(all, 2));
+		if (all->parse->map[(int)floor(all->ray->calc_y)][(int)floor(all->ray->calc_x)] == wall)
+			return(assign_ray(all, 1));
 	}
+}
+
+void assign_ray(t_all *all, int id)
+{
+	if (id == 1)
+	{
+		all->ray->ray_x = all->ray->calc_x;
+		all->ray->ray_y = all->ray->calc_y;
+		all->ray->ray_length = all->ray->calc_ray;
+		all->ray->valid_ray = true;
+	}
+	if (id == 2)
+		all->ray->valid_ray = false;
+
 }
 
 void ray_end_ypos(t_all *all)
