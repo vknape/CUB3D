@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:19:14 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/30 15:34:34 by vknape           ###   ########.fr       */
+/*   Updated: 2025/02/03 13:26:20 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void ray_end_xpos(t_all *all)
 
 	if (all->ray->xneg)
 	{
-		printf("neg\n");
+		printf("neg x\n");
 		x = fmod(all->game->px, 1.0);
 		y = all->game->py;
 		or = all->game->p_or;
@@ -217,7 +217,10 @@ void ray_end_xpos(t_all *all)
 			or = (2 * pi) - or;
 		or = pi - or;
 		ray = x / cos(or);
-		y += tan(or) * x;
+		if (all->ray->yneg)
+			y -= tan(or) * x;
+		else
+			y += tan(or) * x;
 		x = floor(all->game->px);
 		// printf("seg px = %f\n", all->game->px);
 		// printf("seg py = %f\n", all->game->py);
@@ -225,7 +228,7 @@ void ray_end_xpos(t_all *all)
 		// printf("seg y = %f\n", floor(y));
 		// printf("seg ray = %f\n\n", ray);
 		x -= 1;
-		if (x > all->parse->map_width || y > all->parse->map_height)
+		if (x > all->parse->map_width || y > all->parse->map_height  || x < 0 || y < 0)
 		{
 			all->ray->valid_ray = false;
 			printf("x 1\n");
@@ -240,22 +243,25 @@ void ray_end_xpos(t_all *all)
 			printf("x 2\n");
 			return ;
 		}
-		printf("seg px = %f\n", all->game->px);
-		printf("seg py = %f\n", all->game->py);
-		printf("seg x = %f\n", floor(x));
-		printf("seg y = %f\n", floor(y));
-		printf("seg ray = %f\n\n", ray);
+		// printf("seg px = %f\n", all->game->px);
+		// printf("seg py = %f\n", all->game->py);
+		// printf("seg x = %f\n", floor(x));
+		// printf("seg y = %f\n", floor(y));
+		// printf("seg ray = %f\n\n", ray);
 		while (1)
 		{
 			x--;
 			ray += (1 / cos(or));
-			y += tan(or) * 1;
-			printf("seg px = %f\n", all->game->px);
-			printf("seg py = %f\n", all->game->py);
-			printf("seg x = %f\n", floor(x));
-			printf("seg y = %f\n", floor(y));
-			printf("seg ray = %f\n\n", ray);
-			if (x > all->parse->map_width || y > all->parse->map_height)
+			if (all->ray->yneg)
+				y -= tan(or) * 1;
+			else
+				y += tan(or) * 1;
+			// printf("seg px = %f\n", all->game->px);
+			// printf("seg py = %f\n", all->game->py);
+			// printf("seg x = %f\n", floor(x));
+			// printf("seg y = %f\n", floor(y));
+			// printf("seg ray = %f\n\n", ray);
+			if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 			{
 				all->ray->valid_ray = false;
 				printf("x 3\n");
@@ -274,7 +280,7 @@ void ray_end_xpos(t_all *all)
 	}
 	else
 	{
-		printf("pos\n");
+		printf("pos x\n");
 		x = fmod(all->game->px, 1.0);
 		y = all->game->py;
 		x = 1 - x;
@@ -284,14 +290,17 @@ void ray_end_xpos(t_all *all)
 		if (or == 0.5 * pi)
 			return ;
 		ray = x / cos(or);
-		y += tan(or) * x;
+		if (all->ray->yneg)
+			y -= tan(or) * x;
+		else
+			y += tan(or) * x;
 		x = ceil(x) + floor(all->game->px);
-		printf("seg px = %f\n", all->game->px);
-		printf("seg py = %f\n", all->game->py);
-		printf("seg x = %f\n", floor(x));
-		printf("seg y = %f\n", floor(y));
-		printf("seg ray = %f\n\n", ray);
-		if (x > all->parse->map_width || y > all->parse->map_height)
+		// printf("seg px = %f\n", all->game->px);
+		// printf("seg py = %f\n", all->game->py);
+		// printf("seg x = %f\n", floor(x));
+		// printf("seg y = %f\n", floor(y));
+		// printf("seg ray = %f\n\n", ray);
+		if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 		{
 			all->ray->valid_ray = false;
 			printf("x 1\n");
@@ -310,8 +319,11 @@ void ray_end_xpos(t_all *all)
 		{
 			x++;
 			ray += (1 / cos(or));
-			y += tan(or) * 1;
-			if (x > all->parse->map_width || y > all->parse->map_height)
+			if (all->ray->yneg)
+				y -= tan(or) * 1;
+			else
+				y += tan(or) * 1;
+			if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 			{
 				all->ray->valid_ray = false;
 				printf("x 3\n");
@@ -339,6 +351,7 @@ void ray_end_ypos(t_all *all)
 
 	if (all->ray->yneg)
 	{
+		printf("neg y\n");
 		y = fmod(all->game->py, 1.0);
 		x = all->game->px;
 		or = all->game->p_or;
@@ -346,17 +359,21 @@ void ray_end_ypos(t_all *all)
 			or = (2 * pi) - or;
 		if (or == 0 || or == pi)
 			return ;
-		or = pi - or;
+		if (or > 0.5 * pi)
+			or = pi - or;
 		ray = y / sin(or);
-		x += y / tan(or);
+		if (all->ray->xneg)
+			x -= y / tan(or);
+		else
+			x += y / tan(or);
 		y = floor(all->game->py);
-		// printf("seg px = %f\n", all->game->px);
-		// printf("seg py = %f\n", all->game->py);
-		// printf("seg x = %f\n", floor(x));
-		// printf("seg y = %f\n", floor(y));
-		// printf("seg ray = %f\n\n", ray);
+		printf("seg px = %f\n", all->game->px);
+		printf("seg py = %f\n", all->game->py);
+		printf("seg x = %f\n", floor(x));
+		printf("seg y = %f\n", floor(y));
+		printf("seg ray = %f\n\n", ray);
 		y -= 1;
-		if (x > all->parse->map_width || y > all->parse->map_height)
+		if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 		{
 			all->ray->valid_ray = false;
 			printf("y 1\n");
@@ -372,19 +389,28 @@ void ray_end_ypos(t_all *all)
 				all->ray->valid_ray = true;
 				printf("y 2\n");
 			}
+			printf("y 2.5\n");
 			return ;
 		}
 		while (1)
 		{
 			y--;
 			ray += (1 / sin(or));
-			x += 1 / tan(or);
-			if (x > all->parse->map_width || y > all->parse->map_height)
+			if (all->ray->xneg)
+				x -= 1 / tan(or);
+			else
+				x += 1 / tan(or);
+			if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 			{
 				all->ray->valid_ray = false;
 				printf("y 3\n");
 				break ;
 			}
+			printf("seg px = %f\n", all->game->px);
+			printf("seg py = %f\n", all->game->py);
+			printf("seg x = %f\n", floor(x));
+			printf("seg y = %f\n", floor(y));
+			printf("seg ray = %f\n\n", ray);
 			if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
 			{
 				if (all->ray->valid_ray == false || ray < all->ray->ray_length)
@@ -401,6 +427,7 @@ void ray_end_ypos(t_all *all)
 	}
 	else
 	{
+		printf("pos y\n");
 		y = fmod(all->game->py, 1.0);
 		x = all->game->px;
 		y = 1 - y;
@@ -409,15 +436,23 @@ void ray_end_ypos(t_all *all)
 			or = (2 * pi) - or;
 		if (or == 0 || or == pi)
 			return ;
+		if (or > 0.5 * pi)
+			or = pi - or;
 		ray = y / sin(or);
-		x += y / tan(or);
+		if (all->ray->xneg)
+		{
+			printf("\n\nX NEGATIVE\n\n");
+			x -= y / tan(or);
+		}
+		else
+			x += y / tan(or);
 		y = ceil(y) + floor(all->game->py);
-		// printf("seg px = %f\n", all->game->px);
-		// printf("seg py = %f\n", all->game->py);
-		// printf("seg x = %f\n", floor(x));
-		// printf("seg y = %f\n", floor(y));
-		// printf("seg ray = %f\n\n", ray);
-		if (x > all->parse->map_width || y > all->parse->map_height)
+		printf("seg px = %f\n", all->game->px);
+		printf("seg py = %f\n", all->game->py);
+		printf("seg x = %f\n", floor(x));
+		printf("seg y = %f\n", floor(y));
+		printf("seg ray = %f\n\n", ray);
+		if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 		{
 			all->ray->valid_ray = false;
 			printf("y 1\n");
@@ -433,19 +468,34 @@ void ray_end_ypos(t_all *all)
 				all->ray->valid_ray = true;
 				printf("y 2\n");
 			}
+			printf("y 2.5\n");
 			return ;
 		}
 		while (1)
 		{
 			y++;
 			ray += (1 / sin(or));
-			x += 1 / tan(or);
-			if (x > all->parse->map_width || y > all->parse->map_height)
+			if (all->ray->xneg)
+			{
+			
+				printf("\n\nX WHILE NEGATIVE\n\n");
+				printf("TAN: %f\n\n", 1 / tan(or));
+				printf("RADIAND: %f\n\n", or);
+				x -= 1 / tan(or);
+			}
+			else
+				x += 1 / tan(or);
+			if (x > all->parse->map_width || y > all->parse->map_height || x < 0 || y < 0)
 			{
 				all->ray->valid_ray = false;
 				printf("y 3\n");
 				break ;
 			}
+			printf("seg px = %f\n", all->game->px);
+			printf("seg py = %f\n", all->game->py);
+			printf("seg x = %f\n", floor(x));
+			printf("seg y = %f\n", floor(y));
+			printf("seg ray = %f\n\n", ray);
 			if (all->parse->map[(int)floor(y)][(int)floor(x)] == wall)
 			{
 				if (all->ray->valid_ray == false || ray < all->ray->ray_length)
