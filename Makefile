@@ -10,7 +10,9 @@ SRC			=		clean.c\
 					verify_cub.c\
 					parse_map.c\
 					put_pixel.c\
-					raycasting.c
+					raycasting.c\
+					raycast_x.c\
+					raycast_y.c
 OBJ			=		$(SRC:.c=.o)
 CC			=		cc
 FLAGS		=		-Wall -Wextra -Werror -g

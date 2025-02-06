@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/03 15:08:46 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/06 12:04:37 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,10 @@ void				ft_raydir(void *param);
 void				ft_keys(void *param);
 void				ft_hook(void *param);
 void				wall_collision(t_all *all);
-void				ray_end_x(t_all *all);
-void 				ray_end_y(t_all *all);
 void				ray_end_xpos(t_all *all);
 void				ray_end_ypos(t_all *all);
-void				ray_end_xneg(t_all *all);
-void				ray_end_yneg(t_all *all);
-void				posy_posx(t_all *all);
+void				calculate_ray(t_all *all);
 void				assign_ray(t_all *all, int id);
+void 				ray_xpos_loop (t_all *all);
 
 #endif

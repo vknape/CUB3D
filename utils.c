@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 13:00:10 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/28 15:12:46 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   utils.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/09 13:00:10 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/02/06 11:35:58 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,6 @@ void wall_collision(t_all *all)
 	y = all->game->py * BLOCK;
 	xnew = x + (all->game->dirx * STEP * BLOCK);
 	ynew = y + (all->game->diry * STEP * BLOCK);
-	printf("xnew: %f\n", xnew);
-	printf("ynew: %f\n", ynew);
-
 	x = floor(xnew / BLOCK);
 	y = floor(ynew / BLOCK);
 	if (all->parse->map[(int)y][(int)x] != wall)
