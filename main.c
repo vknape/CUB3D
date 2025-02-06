@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
-/*   Updated: 2025/01/21 13:25:52 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/06 14:40:10 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	start_game(t_all *all)
 	all->game->window = mlx_init(WINDOW_X, WINDOW_Y, "cub3D", 1);
 	if (!all->game->window)
 		clean_all(all, 0);
-	all->game->img_width = all->parse->map_width * 50;
-	all->game->img_height = all->parse->map_height * 50;
+	all->game->img_width = all->parse->map_width * BLOCK;
+	all->game->img_height = all->parse->map_height * BLOCK;
 	all->game->image = mlx_new_image(all->game->window, all->game->img_width,
 			all->game->img_height);
 	mlx_image_to_window(all->game->window, all->game->image, 0, 0);

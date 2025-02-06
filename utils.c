@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/09 13:00:10 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/06 11:35:58 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/06 14:41:31 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	ft_keys(void *param)
 		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_LEFT))
-		all->game->p_or += (pi / 90);
+		all->game->p_or += (pi / 45);
 	if (mlx_is_key_down(all->game->window, MLX_KEY_RIGHT))
-		all->game->p_or -= (pi / 90);
+		all->game->p_or -= (pi / 45);
 
 	while (all->game->p_or < 0)
 		all->game->p_or += 2 * pi;

@@ -6,7 +6,7 @@
 /*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:24:06 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/23 11:52:39 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/06 14:56:11 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,34 @@ void	print_pixel(t_all *all, int i, int j)
 	}
 }
 
+void	print_3d(t_all *all, int i, int j)
+{
+	int	x;
+	int	y;
+	uint32_t color;
+
+	// if (all->parse->map[j][i] == space)
+	// 	color = 0x00000000;
+	if (j < all->parse->map_height / 2)
+		color = 0xFFFFFFFF;
+	else
+		color = 0x000000FF;
+	// else
+	// 	color = 0xFF0000FF;
+	x = 0;
+	y = 0;
+	while (y < BLOCK)
+	{
+		while (x < BLOCK)
+		{
+			mlx_put_pixel(all->game->image, i * BLOCK + x, j * BLOCK + y, color);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
 void	ft_hook(void *param)
 {
 	t_all	*all;
@@ -53,7 +81,7 @@ void	ft_hook(void *param)
 	{
 		while (all->parse->map[j][i])
 		{
-			print_pixel(all, i, j);
+			print_3d(all, i, j);
 			i++;
 		}
 		i = 0;

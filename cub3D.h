@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/06 12:04:37 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/06 15:14:48 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WINDOW_Y 1080
 # define pi 3.141592653589793
 # define fov pi / 2
-# define BLOCK 50.0
+# define BLOCK 64.0
 # define STEP 5.0 / BLOCK
 
 enum				e_elem
@@ -128,5 +128,7 @@ void				ray_end_ypos(t_all *all);
 void				calculate_ray(t_all *all);
 void				assign_ray(t_all *all, int id);
 void 				ray_xpos_loop (t_all *all);
+void				ray_ypos_loop (t_all *all);
+void				draw_ray3d(t_all *all, int z);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/06 12:03:35 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/06 15:32:06 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,38 @@ void	ft_raydir(void *param)
 		all->game->p_or = dir;
 		all->game->dirx = cos(dir);
 		all->game->diry = -sin(dir);
-		draw_ray(all);
+		// draw_ray(all);
+		draw_ray3d(all, i);
 		i++;
 	}
 	all->game->p_or = or;
 	
+}
+
+void	draw_ray3d(t_all *all, int z)
+{
+	int	i;
+	int	j;
+	double height;
+	// double	x;
+	// double	y;
+
+	i = 0;
+	j = 0;
+	calculate_ray(all);
+	height = WINDOW_Y / (all->ray->ray_length * BLOCK);
+
+	while (i < (WINDOW_X / 90))
+	{
+		while (j < height)
+		{
+			mlx_put_pixel(all->game->image, ((WINDOW_X / 90 * z) + i), (WINDOW_Y / 2) - (height / 2) + j, 0xF0F0F0FF); //(WINDOW_Y / 2) - (height / 2) + j
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+
 }
 
 void	draw_ray(t_all *all)
@@ -57,6 +84,7 @@ void	draw_ray(t_all *all)
 		i++;
 	}
 }
+
 
 void	calculate_ray(t_all *all)
 {
