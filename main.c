@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/06 14:40:10 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/10 14:10:54 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	start_game(t_all *all)
 	all->game->img_height = all->parse->map_height * BLOCK;
 	all->game->image = mlx_new_image(all->game->window, all->game->img_width,
 			all->game->img_height);
+	load_textures(all);
 	mlx_image_to_window(all->game->window, all->game->image, 0, 0);
 	mlx_loop_hook(all->game->window, ft_hook, all);
 	mlx_loop_hook(all->game->window, ft_keys, all);

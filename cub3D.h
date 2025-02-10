@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/06 15:14:48 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/10 14:18:27 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_game
 	double			p_or;
 	double			dirx;
 	double			diry;
+	
 }					t_game;
 
 typedef struct s_parse
@@ -129,6 +130,7 @@ void				calculate_ray(t_all *all);
 void				assign_ray(t_all *all, int id);
 void 				ray_xpos_loop (t_all *all);
 void				ray_ypos_loop (t_all *all);
-void				draw_ray3d(t_all *all, int z);
+void				render_line(t_all *all);
+void 				load_textures (t_all *all);
 
 #endif

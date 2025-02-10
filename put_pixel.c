@@ -6,7 +6,7 @@
 /*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:24:06 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/06 14:56:11 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/10 14:11:11 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,4 @@ void	ft_hook(void *param)
 		i = 0;
 		j++;
 	}
-	// printf("%f\n", all->game->window->delta_time);
 }
