@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   verify_cub.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 15:01:07 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/16 14:46:07 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   verify_cub.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/09 15:01:07 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/02/11 14:49:49 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ void	check_invalid(t_all *all)
 void check_texture(t_all *all)
 {
 	trim_texture(all);
-	all->game->north = mlx_load_png(all->parse->north);
-	if (!all->game->north)
+	all->texture->north = mlx_load_png(all->parse->north);
+	if (!all->texture->north)
 		clean_all(all, 12);
-	all->game->south = mlx_load_png(all->parse->south);
-	if (!all->game->south)
+	all->texture->south = mlx_load_png(all->parse->south);
+	if (!all->texture->south)
 		clean_all(all, 12);
-	all->game->east = mlx_load_png(all->parse->east);
-	if (!all->game->east)
+	all->texture->east = mlx_load_png(all->parse->east);
+	if (!all->texture->east)
 		clean_all(all, 12);
-	all->game->west = mlx_load_png(all->parse->west);
-	if (!all->game->west)
+	all->texture->west = mlx_load_png(all->parse->west);
+	if (!all->texture->west)
 		clean_all(all, 12);
 
 }

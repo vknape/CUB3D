@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/10 14:18:27 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/11 15:33:28 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ typedef struct s_game
 {
 	mlx_t			*window;
 	mlx_image_t		*image;
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
 	int				img_width;
 	int				img_height;
 	double			px;
@@ -84,10 +80,31 @@ typedef struct s_ray
 	double  calc_or;
 	double 	calc_ray;
 	double	ray_length;
+	double	wall_height;
+	double	wall_top;
+	double	wall_bottom;
 	bool	valid_ray;
 	bool	xneg;
 	bool	yneg;
+	mlx_texture_t	*texture;
 }			t_ray;
+
+typedef struct s_texture
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+    double north_scale_h;
+    double north_scale_w;
+    double south_scale_h;
+    double south_scale_w;
+    double east_scale_h;
+    double east_scale_w;
+    double west_scale_h;
+    double west_scale_w;
+} t_texture;
+
 
 typedef struct s_all
 {
@@ -95,6 +112,7 @@ typedef struct s_all
 	t_parse			*parse;
 	t_game			*game;
 	t_ray			*ray;
+	t_texture		*texture;
 }					t_all;
 
 void				init_struct(t_all **all);
@@ -127,10 +145,12 @@ void				wall_collision(t_all *all);
 void				ray_end_xpos(t_all *all);
 void				ray_end_ypos(t_all *all);
 void				calculate_ray(t_all *all);
-void				assign_ray(t_all *all, int id);
+void				assign_ray(t_all *all, int id, char axis);
 void 				ray_xpos_loop (t_all *all);
 void				ray_ypos_loop (t_all *all);
-void				render_line(t_all *all);
+void				render_line(t_all *all, int i, double dir);
 void 				load_textures (t_all *all);
+void				scale_texture (t_all *all);
+uint32_t			texture_color(t_all *all, double tex_y);
 
 #endif
