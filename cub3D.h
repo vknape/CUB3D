@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/11 15:33:28 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
+/*   Updated: 2025/02/13 14:15:31 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_ray
 	bool	xneg;
 	bool	yneg;
 	mlx_texture_t	*texture;
+	char	axis;
 }			t_ray;
 
 typedef struct s_texture
@@ -151,6 +152,6 @@ void				ray_ypos_loop (t_all *all);
 void				render_line(t_all *all, int i, double dir);
 void 				load_textures (t_all *all);
 void				scale_texture (t_all *all);
-uint32_t			texture_color(t_all *all, double tex_y);
+uint32_t			texture_color(t_all *all, int tex_y, double dist);
 
 #endif

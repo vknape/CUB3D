@@ -15,7 +15,7 @@ SRC			=		clean.c\
 					raycast_y.c
 OBJ			=		$(SRC:.c=.o)
 CC			=		cc
-FLAGS		=		-Wall -Wextra -Werror -g
+FLAGS		=		-Wall -Wextra -Werror -g -O3 -ofast
 # FLAGS		+=		-fsanitize=thread
 # FLAGS		+=		-fsanitize=address
 MLX42		=		MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
@@ -48,10 +48,14 @@ fclean:		clean
 re:			fclean all
 				make clean
 
+build:
+				@rm -rf ./MLX42/build
+				make re
+
 run:		all
 				@./$(NAME) $(ARGS)
 #				@bash ./test.sh
 #				@valgrind --leak-check=full ./$(NAME) $(ARGS)
 
 
-.PHONY:		all clean fclean re libmlx
+.PHONY:		all clean fclean re libmlx build

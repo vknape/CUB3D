@@ -1,6 +1,6 @@
 CMakeFiles/mlx42.dir/src/font/mlx_font.c.o: \
-  /home/snijhuis/cub3D/MLX42/src/font/mlx_font.c \
-  /home/snijhuis/cub3D/MLX42/src/font/font.h \
+  /home/vknape/projects/cub3d/MLX42/src/font/mlx_font.c \
+  /home/vknape/projects/cub3d/MLX42/src/font/font.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -17,14 +17,15 @@ CMakeFiles/mlx42.dir/src/font/mlx_font.c.o: \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
-  /home/snijhuis/cub3D/MLX42/include/MLX42/MLX42_Int.h \
-  /home/snijhuis/cub3D/MLX42/include/MLX42/MLX42.h \
+  /home/vknape/projects/cub3d/MLX42/include/MLX42/MLX42_Int.h \
+  /home/vknape/projects/cub3d/MLX42/include/MLX42/MLX42.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/stddef.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/__stddef_max_align_t.h \
   /usr/lib/llvm-12/lib/clang/12.0.1/include/stdbool.h \
-  /home/snijhuis/cub3D/MLX42/include/lodepng/lodepng.h \
-  /usr/include/string.h /home/snijhuis/cub3D/MLX42/include/glad/glad.h \
-  /home/snijhuis/cub3D/MLX42/include/KHR/khrplatform.h \
+  /home/vknape/projects/cub3d/MLX42/include/lodepng/lodepng.h \
+  /usr/include/string.h \
+  /home/vknape/projects/cub3d/MLX42/include/glad/glad.h \
+  /home/vknape/projects/cub3d/MLX42/include/KHR/khrplatform.h \
   /usr/include/GLFW/glfw3.h /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \

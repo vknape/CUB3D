@@ -1,11 +1,11 @@
-NO ./saleunin.png
-SO ./saleunin.png
-EA ./rups.png
+NO ./rups.png
+SO ./rups.png
+EA ./wall.png
 
 
 
 
-WE ./rups.png
+WE ./wall.png
 
 F 220,100,0
 C 225,30,0
