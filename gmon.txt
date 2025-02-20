@@ -1,0 +1,360 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 48.41      1.22     1.22   132480     0.01     0.02  render_line
+ 32.94      2.05     0.83 100116519     0.00     0.00  texture_color
+  6.75      2.22     0.17       70     2.43     2.43  ft_hook
+  5.95      2.37     0.15                             mlx_put_pixel
+  1.98      2.42     0.05                             lodepng_inflatev
+  1.98      2.47     0.05                             unfilter
+  1.19      2.50     0.03                             lodepng_convert
+  0.79      2.52     0.02   132480     0.00     0.00  ray_end_xpos
+  0.00      2.52     0.00   264960     0.00     0.00  assign_ray
+  0.00      2.52     0.00   132480     0.00     0.00  ray_end_ypos
+  0.00      2.52     0.00    97845     0.00     0.00  ray_ypos_loop
+  0.00      2.52     0.00    77446     0.00     0.00  ray_xpos_loop
+  0.00      2.52     0.00     1539     0.00     0.00  ft_strchr_gnl
+  0.00      2.52     0.00     1365     0.00     0.00  ft_strjoin_gnl
+  0.00      2.52     0.00      120     0.00     0.00  free_all
+  0.00      2.52     0.00      116     0.00     0.00  ft_strlen_gnl
+  0.00      2.52     0.00       70     0.00     0.00  ft_keys
+  0.00      2.52     0.00       69     0.00    30.00  ft_raydir
+  0.00      2.52     0.00       60     0.00     0.00  get_next_line
+  0.00      2.52     0.00       60     0.00     0.00  read_line
+  0.00      2.52     0.00       58     0.00     0.00  ft_strlcpy_gnl
+  0.00      2.52     0.00       37     0.00     0.00  wall_collision
+  0.00      2.52     0.00       36     0.00     0.00  check_map_column
+  0.00      2.52     0.00       19     0.00     0.00  custom_strlen
+  0.00      2.52     0.00       17     0.00     0.00  check_invalid
+  0.00      2.52     0.00       17     0.00     0.00  check_map_row
+  0.00      2.52     0.00       17     0.00     0.00  fill_row
+  0.00      2.52     0.00        8     0.00     0.00  check_element2
+  0.00      2.52     0.00        1     0.00     0.00  check_file
+  0.00      2.52     0.00        1     0.00     0.00  check_map_boundaries
+  0.00      2.52     0.00        1     0.00     0.00  clean_all
+  0.00      2.52     0.00        1     0.00     0.00  clean_parse
+  0.00      2.52     0.00        1     0.00     0.00  init_struct
+  0.00      2.52     0.00        1     0.00     0.00  load_textures
+  0.00      2.52     0.00        1     0.00     0.00  parse
+  0.00      2.52     0.00        1     0.00     0.00  parse_map
+  0.00      2.52     0.00        1     0.00     0.00  read_map
+  0.00      2.52     0.00        1     0.00     0.00  scale_texture
+  0.00      2.52     0.00        1     0.00     0.00  start_game
+  0.00      2.52     0.00        1     0.00     0.00  verify_map
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.40% of 2.52 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     88.9    0.00    2.24                 mlx_loop [1]
+                0.00    2.07      69/69          ft_raydir [3]
+                0.17    0.00      70/70          ft_hook [5]
+                0.00    0.00      70/70          ft_keys [19]
+-----------------------------------------------
+                1.22    0.85  132480/132480      ft_raydir [3]
+[2]     82.1    1.22    0.85  132480         render_line [2]
+                0.83    0.00 100116519/100116519     texture_color [4]
+                0.02    0.00  132480/132480      ray_end_xpos [10]
+                0.00    0.00  264960/264960      assign_ray [11]
+                0.00    0.00  132480/132480      ray_end_ypos [12]
+                0.00    0.00   97845/97845       ray_ypos_loop [13]
+                0.00    0.00   77446/77446       ray_xpos_loop [14]
+-----------------------------------------------
+                0.00    2.07      69/69          mlx_loop [1]
+[3]     82.1    0.00    2.07      69         ft_raydir [3]
+                1.22    0.85  132480/132480      render_line [2]
+-----------------------------------------------
+                0.83    0.00 100116519/100116519     render_line [2]
+[4]     32.9    0.83    0.00 100116519         texture_color [4]
+-----------------------------------------------
+                0.17    0.00      70/70          mlx_loop [1]
+[5]      6.7    0.17    0.00      70         ft_hook [5]
+-----------------------------------------------
+                                                 <spontaneous>
+[6]      6.0    0.15    0.00                 mlx_put_pixel [6]
+-----------------------------------------------
+                                                 <spontaneous>
+[7]      2.0    0.05    0.00                 lodepng_inflatev [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      2.0    0.05    0.00                 unfilter [8]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      1.2    0.03    0.00                 lodepng_convert [9]
+-----------------------------------------------
+                0.02    0.00  132480/132480      render_line [2]
+[10]     0.8    0.02    0.00  132480         ray_end_xpos [10]
+-----------------------------------------------
+                0.00    0.00  264960/264960      render_line [2]
+[11]     0.0    0.00    0.00  264960         assign_ray [11]
+-----------------------------------------------
+                0.00    0.00  132480/132480      render_line [2]
+[12]     0.0    0.00    0.00  132480         ray_end_ypos [12]
+-----------------------------------------------
+                0.00    0.00   97845/97845       render_line [2]
+[13]     0.0    0.00    0.00   97845         ray_ypos_loop [13]
+-----------------------------------------------
+                0.00    0.00   77446/77446       render_line [2]
+[14]     0.0    0.00    0.00   77446         ray_xpos_loop [14]
+-----------------------------------------------
+                0.00    0.00     232/1539        get_next_line [20]
+                0.00    0.00    1307/1539        read_line [21]
+[15]     0.0    0.00    0.00    1539         ft_strchr_gnl [15]
+-----------------------------------------------
+                0.00    0.00      58/1365        get_next_line [20]
+                0.00    0.00    1307/1365        read_line [21]
+[16]     0.0    0.00    0.00    1365         ft_strjoin_gnl [16]
+-----------------------------------------------
+                0.00    0.00       1/120         verify_map [41]
+                0.00    0.00      58/120         get_next_line [20]
+                0.00    0.00      61/120         read_line [21]
+[17]     0.0    0.00    0.00     120         free_all [17]
+-----------------------------------------------
+                0.00    0.00     116/116         get_next_line [20]
+[18]     0.0    0.00    0.00     116         ft_strlen_gnl [18]
+-----------------------------------------------
+                0.00    0.00      70/70          mlx_loop [1]
+[19]     0.0    0.00    0.00      70         ft_keys [19]
+                0.00    0.00      37/37          wall_collision [23]
+                0.00    0.00       1/1           clean_all [32]
+-----------------------------------------------
+                0.00    0.00       1/60          clean_parse [33]
+                0.00    0.00      12/60          check_file [30]
+                0.00    0.00      18/60          verify_map [41]
+                0.00    0.00      29/60          read_map [38]
+[20]     0.0    0.00    0.00      60         get_next_line [20]
+                0.00    0.00     232/1539        ft_strchr_gnl [15]
+                0.00    0.00     116/116         ft_strlen_gnl [18]
+                0.00    0.00      60/60          read_line [21]
+                0.00    0.00      58/58          ft_strlcpy_gnl [22]
+                0.00    0.00      58/1365        ft_strjoin_gnl [16]
+                0.00    0.00      58/120         free_all [17]
+-----------------------------------------------
+                0.00    0.00      60/60          get_next_line [20]
+[21]     0.0    0.00    0.00      60         read_line [21]
+                0.00    0.00    1307/1365        ft_strjoin_gnl [16]
+                0.00    0.00    1307/1539        ft_strchr_gnl [15]
+                0.00    0.00      61/120         free_all [17]
+-----------------------------------------------
+                0.00    0.00      58/58          get_next_line [20]
+[22]     0.0    0.00    0.00      58         ft_strlcpy_gnl [22]
+-----------------------------------------------
+                0.00    0.00      37/37          ft_keys [19]
+[23]     0.0    0.00    0.00      37         wall_collision [23]
+-----------------------------------------------
+                0.00    0.00      36/36          check_map_boundaries [31]
+[24]     0.0    0.00    0.00      36         check_map_column [24]
+-----------------------------------------------
+                0.00    0.00      19/19          verify_map [41]
+[25]     0.0    0.00    0.00      19         custom_strlen [25]
+-----------------------------------------------
+                0.00    0.00      17/17          verify_map [41]
+[26]     0.0    0.00    0.00      17         check_invalid [26]
+-----------------------------------------------
+                0.00    0.00      17/17          check_map_boundaries [31]
+[27]     0.0    0.00    0.00      17         check_map_row [27]
+-----------------------------------------------
+                0.00    0.00      17/17          read_map [38]
+[28]     0.0    0.00    0.00      17         fill_row [28]
+-----------------------------------------------
+                0.00    0.00       8/8           check_file [30]
+[29]     0.0    0.00    0.00       8         check_element2 [29]
+-----------------------------------------------
+                0.00    0.00       1/1           parse [36]
+[30]     0.0    0.00    0.00       1         check_file [30]
+                0.00    0.00      12/60          get_next_line [20]
+                0.00    0.00       8/8           check_element2 [29]
+-----------------------------------------------
+                0.00    0.00       1/1           parse [36]
+[31]     0.0    0.00    0.00       1         check_map_boundaries [31]
+                0.00    0.00      36/36          check_map_column [24]
+                0.00    0.00      17/17          check_map_row [27]
+-----------------------------------------------
+                0.00    0.00       1/1           ft_keys [19]
+[32]     0.0    0.00    0.00       1         clean_all [32]
+                0.00    0.00       1/1           clean_parse [33]
+-----------------------------------------------
+                0.00    0.00       1/1           clean_all [32]
+[33]     0.0    0.00    0.00       1         clean_parse [33]
+                0.00    0.00       1/60          get_next_line [20]
+-----------------------------------------------
+                0.00    0.00       1/1           main [123]
+[34]     0.0    0.00    0.00       1         init_struct [34]
+-----------------------------------------------
+                0.00    0.00       1/1           start_game [40]
+[35]     0.0    0.00    0.00       1         load_textures [35]
+-----------------------------------------------
+                0.00    0.00       1/1           main [123]
+[36]     0.0    0.00    0.00       1         parse [36]
+                0.00    0.00       1/1           verify_map [41]
+                0.00    0.00       1/1           check_file [30]
+                0.00    0.00       1/1           read_map [38]
+                0.00    0.00       1/1           parse_map [37]
+                0.00    0.00       1/1           check_map_boundaries [31]
+-----------------------------------------------
+                0.00    0.00       1/1           parse [36]
+[37]     0.0    0.00    0.00       1         parse_map [37]
+-----------------------------------------------
+                0.00    0.00       1/1           parse [36]
+[38]     0.0    0.00    0.00       1         read_map [38]
+                0.00    0.00      29/60          get_next_line [20]
+                0.00    0.00      17/17          fill_row [28]
+-----------------------------------------------
+                0.00    0.00       1/1           start_game [40]
+[39]     0.0    0.00    0.00       1         scale_texture [39]
+-----------------------------------------------
+                0.00    0.00       1/1           main [123]
+[40]     0.0    0.00    0.00       1         start_game [40]
+                0.00    0.00       1/1           scale_texture [39]
+                0.00    0.00       1/1           load_textures [35]
+-----------------------------------------------
+                0.00    0.00       1/1           parse [36]
+[41]     0.0    0.00    0.00       1         verify_map [41]
+                0.00    0.00      19/19          custom_strlen [25]
+                0.00    0.00      18/60          get_next_line [20]
+                0.00    0.00      17/17          check_invalid [26]
+                0.00    0.00       1/120         free_all [17]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [11] assign_ray              [3] ft_raydir              [12] ray_end_ypos
+  [29] check_element2         [15] ft_strchr_gnl          [14] ray_xpos_loop
+  [30] check_file             [16] ft_strjoin_gnl         [13] ray_ypos_loop
+  [26] check_invalid          [22] ft_strlcpy_gnl         [21] read_line
+  [31] check_map_boundaries   [18] ft_strlen_gnl          [38] read_map
+  [24] check_map_column       [20] get_next_line           [2] render_line
+  [27] check_map_row          [34] init_struct            [39] scale_texture
+  [32] clean_all              [35] load_textures          [40] start_game
+  [33] clean_parse             [9] lodepng_convert         [4] texture_color
+  [25] custom_strlen           [7] lodepng_inflatev        [8] unfilter
+  [28] fill_row                [6] mlx_put_pixel          [41] verify_map
+  [17] free_all               [36] parse                  [23] wall_collision
+   [5] ft_hook                [37] parse_map
+  [19] ft_keys                [10] ray_end_xpos

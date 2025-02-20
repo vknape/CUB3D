@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:19:14 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/02/13 15:17:48 by vknape           ###   ########.fr       */
+/*   Updated: 2025/02/20 15:30:29 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_raydir(void *param)
 	int		i;
 	
 	all = param;
+	// if (all->print == false)
+	// 	return ;
 	dir = all->game->p_or - fov / 2;
 	or = all->game->p_or;
 	i = 0;
@@ -44,7 +46,7 @@ void	ft_raydir(void *param)
 		i++;
 	}
 	all->game->p_or = or;
-	
+	all->print = false;
 }
 
 void	render_line(t_all *all, int i, double dir)
@@ -57,31 +59,36 @@ void	render_line(t_all *all, int i, double dir)
 	uint32_t color;
 
 	calculate_ray(all);
-	all->ray->ray_x = fmod(all->ray->ray_x, 1.0) * all->ray->texture->width;
-	all->ray->ray_y = fmod(all->ray->ray_y, 1.0) * all->ray->texture->width;
+	all->ray->ray_x = (all->ray->ray_x - floor(all->ray->ray_x)) * all->ray->texture->width;
+	all->ray->ray_y = (all->ray->ray_y - floor(all->ray->ray_y)) * all->ray->texture->width;
+
 	ray_diff = dir - all->game->p_or;
 	// printf("diff = %lf\n", ray_diff);
 	dist = all->ray->ray_length * cos(ray_diff);
 	all->ray->wall_height = WINDOW_Y / dist;
 	all->ray->wall_top = WINDOW_Y / 2 - all->ray->wall_height / 2;
 	all->ray->wall_bottom = WINDOW_Y / 2 + all->ray->wall_height / 2;
-	if (all->ray->wall_top < 0)
-		all->ray->wall_top = 0;
-	if (all->ray->wall_bottom >= WINDOW_Y)
-		all->ray->wall_bottom = 0;
+	// if (all->ray->wall_top < 0)
+	// 	all->ray->wall_top = 0;
+	// if (all->ray->wall_bottom >= WINDOW_Y)
+	// 	all->ray->wall_bottom = 0;
 	// x = fmod
 	y = 0;
-	while (y < all->ray->wall_height && y < WINDOW_Y)
+	while (y < all->ray->wall_height)
 	{
-		color = texture_color(all, y, dist);
+		// color = texture_color(all, y, dist);
 		// printf("x = %d\n", WINDOW_X - i);
 		// printf("y = %lf\n\n", all->ray->wall_bottom - y);
-		if (all->ray->wall_top + y > WINDOW_Y - 1)
+		// if (y > WINDOW_Y - 1)
+		// {
+		// 	// printf("went out of bounce with y\n");
+		// 	return ;
+		// }
+		if (all->ray->wall_top + y >= 0 && all->ray->wall_top + y < WINDOW_Y - 1)
 		{
-			// printf("went out of bounce with y\n");
-			return ;
+			color = texture_color(all, y, dist);
+			mlx_put_pixel(all->game->image, WINDOW_X - i, all->ray->wall_top + y , color);
 		}
-		mlx_put_pixel(all->game->image, WINDOW_X - i, all->ray->wall_top + y , color);
 		y++;
 	}
 
@@ -95,6 +102,7 @@ uint32_t	texture_color(t_all *all, int tex_y, double dist)
 	uint32_t	color;
 	int			index;
 	int			tex_x;
+	// int			offset;
 	dist = 0;
 
 
@@ -103,6 +111,9 @@ uint32_t	texture_color(t_all *all, int tex_y, double dist)
 	if (all->ray->axis == 'x')
 		tex_x = all->ray->ray_y;
 	// printf("axis = %c\n\n", all->ray->axis);
+	// if (dist < 1)
+		// offset = (tex_y - WINDOW_Y / 2) + all->ray->texture->height / 2;
+		// tex_y += abs((int)all->ray->wall_top);
 	tex_y = tex_y / all->ray->wall_height * all->ray->texture->height;
 	index = (all->ray->texture->width * tex_y + tex_x) * 4;
 	color = 0;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   put_pixel.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: snijhuis <snijhuis@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/21 13:24:06 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/10 14:11:11 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 13:24:06 by snijhuis          #+#    #+#             */
+/*   Updated: 2025/02/20 15:24:23 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	ft_hook(void *param)
 	int	j;
 
 	all = param;
+	// if (all->print == false)
+	// 	return ;
 	i = 0;
 	j = 0;
 	while (all->parse->map[j])

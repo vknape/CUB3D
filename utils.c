@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/09 13:00:10 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/06 14:41:31 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 13:00:10 by snijhuis          #+#    #+#             */
+/*   Updated: 2025/02/20 15:20:09 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,29 @@ int	custom_strlen(char *str)
 	return (count + 1);
 }
 
+void	my_keyhook(mlx_key_data_t keydata, void *param)
+{
+	t_all	*all;
+
+	all = param;
+
+	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	{
+		// all->game->py -= 5.0 / BLOCK;
+		wall_collision(all);
+	}
+
+	if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+		all->game->p_or += (pi / 45);
+	if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+		all->game->p_or -= (pi / 45);
+
+	while (all->game->p_or < 0)
+		all->game->p_or += 2 * pi;
+	if (all->game->p_or > 2 * pi)
+		all->game->p_or = fmod(all->game->p_or, 2 * pi);
+}
+
 void	ft_keys(void *param)
 {
 	t_all	*all;
@@ -45,6 +68,7 @@ void	ft_keys(void *param)
 	if (mlx_is_key_down(all->game->window, MLX_KEY_W))
 	{
 		// all->game->py -= 5.0 / BLOCK;
+		all->print = true;
 		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_S))
@@ -63,9 +87,15 @@ void	ft_keys(void *param)
 		wall_collision(all);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_LEFT))
+	{
 		all->game->p_or += (pi / 45);
+		all->print = true;
+	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_RIGHT))
+	{
 		all->game->p_or -= (pi / 45);
+		all->print = true;
+	}
 
 	while (all->game->p_or < 0)
 		all->game->p_or += 2 * pi;
@@ -92,20 +122,26 @@ void wall_collision(t_all *all)
 
 	all->game->dirx = cos(all->game->p_or);
 	all->game->diry = -sin(all->game->p_or);
+	// printf("y: %lf", all->game->diry);
+	// printf("x: %lf", all->game->dirx);
 
 	x = all->game->px * BLOCK;
 	y = all->game->py * BLOCK;
-	xnew = x + (all->game->dirx * STEP * BLOCK);
-	ynew = y + (all->game->diry * STEP * BLOCK);
-	x = floor(xnew / BLOCK);
-	y = floor(ynew / BLOCK);
+	xnew = x + (all->game->dirx * (STEP * BLOCK));
+	ynew = y + (all->game->diry * (STEP * BLOCK));
+	if (all->game->dirx > 0)
+		x = floor((xnew + 12) / BLOCK);
+	else
+		x = floor((xnew - 12) / BLOCK);
+	if (all->game->diry > 0)
+		y = floor((ynew + 12) / BLOCK);
+	else
+		y = floor((ynew - 12) / BLOCK);
 	if (all->parse->map[(int)y][(int)x] != wall)
 	{
 		all->game->px = xnew / BLOCK;
 		all->game->py = ynew / BLOCK;
 	}
-
-	
 }
 
 // void	ft_raydir(void *param)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/10 14:10:54 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 13:43:26 by vknape            #+#    #+#             */
+/*   Updated: 2025/02/20 14:33:01 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	start_game(t_all *all)
 	all->game->image = mlx_new_image(all->game->window, all->game->img_width,
 			all->game->img_height);
 	load_textures(all);
+	all->print = true;
 	mlx_image_to_window(all->game->window, all->game->image, 0, 0);
 	mlx_loop_hook(all->game->window, ft_hook, all);
 	mlx_loop_hook(all->game->window, ft_keys, all);
+	// mlx_key_hook(all->game->window, &my_keyhook, all);
 	mlx_loop_hook(all->game->window, ft_raydir, all);
 	mlx_loop(all->game->window);
 	(void)all;

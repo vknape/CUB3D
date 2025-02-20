@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/02/13 14:15:31 by vknape           ###   ########.fr       */
+/*   Updated: 2025/02/20 14:49:22 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_texture
 typedef struct s_all
 {
 	int				status;
+	bool			print;
 	t_parse			*parse;
 	t_game			*game;
 	t_ray			*ray;
@@ -141,6 +142,7 @@ void				trim_texture(t_all *all);
 void				draw_ray(t_all *all);
 void				ft_raydir(void *param);
 void				ft_keys(void *param);
+void				my_keyhook(mlx_key_data_t keydata, void *param);
 void				ft_hook(void *param);
 void				wall_collision(t_all *all);
 void				ray_end_xpos(t_all *all);
