@@ -6,24 +6,20 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 13:06:42 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/01/23 11:49:29 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 11:48:32 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-//Main function for handling parsing
-
+// Main function for handling parsing
 void	parse(t_all *all, char **argv)
 {
 	all->parse->fd_cub = open(argv[1], O_RDONLY);
 	if (all->parse->fd_cub == -1)
 		clean_all(all, 0);
-	printf("valid fd_cub\n");
 	check_file(all);
 	verify_map(all);
-	// check_texture(all);
-	// check_colour(all);
 	if (close(all->parse->fd_cub) == -1)
 		clean_all(all, 0);
 	all->parse->fd_cub = open(argv[1], O_RDONLY);
@@ -33,11 +29,8 @@ void	parse(t_all *all, char **argv)
 	if (close(all->parse->fd_cub) == -1)
 		clean_all(all, 0);
 	check_map_boundaries(all);
-	// all->parse->map[all->parse->player_y][all->parse->player_x] = all->parse->orientation;
 	all->game->px = (double)all->parse->player_x + (1.0 / 4.0);
-	printf("px %f\n", all->game->px);
 	all->game->py = (all->parse->player_y + 0.25);
-	printf("py %f\n", all->game->py);
 	if (all->parse->orientation == 'E')
 		all->game->p_or = 0;
 	if (all->parse->orientation == 'N')
@@ -48,10 +41,9 @@ void	parse(t_all *all, char **argv)
 		all->game->p_or = 1.5 * pi;
 }
 
-//Iterates over each line in the file until all elements have been found
-//or file ends. Stores any valid element and exits if no valid element,
-//duplicate element or empty line has been found
-
+// Iterates over each line in the file until all elements have been found
+// or file ends. Stores any valid element and exits if no valid element,
+// duplicate element or empty line has been found
 void	check_file(t_all *all)
 {
 	all->parse->line = get_next_line(all->parse->fd_cub);
@@ -64,7 +56,6 @@ void	check_file(t_all *all)
 	}
 	if (!all->parse->line)
 		clean_all(all, 0);
-	printf("count = %d\n", all->parse->count);
 }
 
 int	element_found(t_all *all)

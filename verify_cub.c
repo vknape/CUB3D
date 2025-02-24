@@ -6,15 +6,14 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/09 15:01:07 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:49:49 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 12:03:32 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-//Calculate map width and height and check if the lines after the map
-//are valid
-
+// Calculate map width and height and check if the lines after the map
+// are valid
 void	verify_map(t_all *all)
 {
 	while (all->parse->line)
@@ -33,12 +32,9 @@ void	verify_map(t_all *all)
 		free(all->parse->line);
 		all->parse->line = get_next_line(all->parse->fd_cub);
 	}
-	printf("map start %d\n", all->parse->map_start);
-	printf("map height %d\n", all->parse->map_height);
-	printf("map width: %d\n", all->parse->map_width);
 }
-//Check for invalid characters in map and save player orientation
 
+// Check for invalid characters in map and save player orientation
 void	check_invalid(t_all *all)
 {
 	int	i;
@@ -62,9 +58,8 @@ void	check_invalid(t_all *all)
 	}
 }
 
-//Trims edges off texture path and tries loading to see if valid
-
-void check_texture(t_all *all)
+// Trims edges off texture path and tries loading to see if valid
+void	check_texture(t_all *all)
 {
 	trim_texture(all);
 	all->texture->north = mlx_load_png(all->parse->north);
@@ -79,13 +74,11 @@ void check_texture(t_all *all)
 	all->texture->west = mlx_load_png(all->parse->west);
 	if (!all->texture->west)
 		clean_all(all, 12);
-
 }
 
-
-void trim_texture(t_all *all)
+void	trim_texture(t_all *all)
 {
-	char *temp;
+	char	*temp;
 
 	temp = all->parse->north;
 	all->parse->north = ft_strtrim(all->parse->north + 2, " \n");
@@ -109,13 +102,13 @@ void trim_texture(t_all *all)
 		clean_all(all, 0);
 }
 
-void check_colour(t_all *all)
+void	check_colour(t_all *all)
 {
-	char *temp;
+	char	*temp;
 
 	temp = all->parse->ceiling;
 	all->parse->ceiling = ft_strtrim(all->parse->ceiling, "C \n");
-	free(temp);	
+	free(temp);
 	temp = all->parse->floor;
 	all->parse->floor = ft_strtrim(all->parse->floor, "F \n");
 	free(temp);

@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 13:11:12 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:03:53 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 11:15:54 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,40 +39,29 @@ void	load_textures(t_all *all)
 	all->parse->south = ft_strtrim(all->parse->south, "\n");
 	all->parse->east = ft_strtrim(all->parse->east, "\n");
 	all->parse->west = ft_strtrim(all->parse->west, "\n");
-	// all->parse->north[ft_strlen(all->parse->north)] = '\0';
-	// printf("north: %s\n", all->parse->north + 3);
-	// printf("north: %c\n", all->parse->north[ft_strlen(all->parse->north)]);
 	all->texture->north = mlx_load_png(all->parse->north + 3);
-	if (!all->texture->north) // we dont clean the texture yet in clean all
+	if (!all->texture->north)
 		clean_all(all, 20);
 	all->texture->south = mlx_load_png(all->parse->south + 3);
-	if (!all->texture->south) // we dont clean the texture yet in clean all
+	if (!all->texture->south)
 		clean_all(all, 16);
 	all->texture->east = mlx_load_png(all->parse->east + 3);
-	if (!all->texture->east) // we dont clean the texture yet in clean all
+	if (!all->texture->east)
 		clean_all(all, 17);
 	all->texture->west = mlx_load_png(all->parse->west + 3);
-	if (!all->texture->west) // we dont clean the texture yet in clean all
+	if (!all->texture->west)
 		clean_all(all, 18);
 	scale_texture(all);
-	// all->game->north = mlx_load_png("./rups.png");
-	// all->game->image = mlx_texture_to_image(all->game->window, all->game->north);
-	// mlx_image_to_window(all->game->window, all->game->image, 0, 0);
-	// mlx_set_instance_depth(all->game->image->instances, 0);
 }
 
 void	scale_texture(t_all *all)
 {
 	all->texture->north_scale_h = all->texture->north->height / BLOCK;
 	all->texture->north_scale_w = all->texture->north->width / BLOCK;
-
 	all->texture->south_scale_h = all->texture->south->height / BLOCK;
 	all->texture->south_scale_w = all->texture->south->width / BLOCK;
-
 	all->texture->east_scale_h = all->texture->east->height / BLOCK;
 	all->texture->east_scale_w = all->texture->east->width / BLOCK;
-
 	all->texture->west_scale_h = all->texture->west->height / BLOCK;
 	all->texture->west_scale_w = all->texture->west->width / BLOCK;
 }
-

@@ -15,8 +15,8 @@ SRC			=		clean.c\
 					raycast_y.c
 OBJ			=		$(SRC:.c=.o)
 CC			=		gcc
-FLAGS		=		-g -O3 -ofast -pg
-# FLAGS		+=		-Wall -Wextra -Werror
+FLAGS		=		-g -O3 -ofast
+FLAGS		+=		-Wall -Wextra -Werror
 # FLAGS		+=		-fsanitize=thread
 # FLAGS		+=		-fsanitize=address
 MLX42		=		MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 13:19:14 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/02/20 15:30:29 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   raycasting.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/02/24 11:58:47 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-
 void	ft_raydir(void *param)
 {
 	t_all	*all;
 	double	dir;
-	double 	or;
 	int		i;
-	
+	double	or;
+
 	all = param;
-	// if (all->print == false)
-	// 	return ;
 	dir = all->game->p_or - fov / 2;
 	or = all->game->p_or;
 	i = 0;
@@ -37,83 +34,54 @@ void	ft_raydir(void *param)
 		all->game->dirx = cos(dir);
 		all->game->diry = -sin(dir);
 		render_line(all, i, or);
-		// if (or == all->game->p_or)
-		// printf("length:  %lf\n", all->ray->ray_length);
-		// printf("x:  %lf\n", all->ray->ray_x);
-		// printf("y:  %lf\n", all->ray->ray_y);
-		// draw_ray(all);
-		// draw_ray3d(all, i);
 		i++;
 	}
-	all->game->p_or = or;
+	all->game->p_or = or ;
 	all->print = false;
 }
 
 void	render_line(t_all *all, int i, double dir)
 {
-	double	y;
-	double 	ray_diff;
-	double 	dist;
-	// double	tex_y;
-	// double	tex_x;
-	uint32_t color;
+	double		y;
+	double		ray_diff;
+	double		dist;
+	uint32_t	color;
 
 	calculate_ray(all);
-	all->ray->ray_x = (all->ray->ray_x - floor(all->ray->ray_x)) * all->ray->texture->width;
-	all->ray->ray_y = (all->ray->ray_y - floor(all->ray->ray_y)) * all->ray->texture->width;
-
+	all->ray->ray_x = (all->ray->ray_x - floor(all->ray->ray_x))
+		* all->ray->texture->width;
+	all->ray->ray_y = (all->ray->ray_y - floor(all->ray->ray_y))
+		* all->ray->texture->width;
 	ray_diff = dir - all->game->p_or;
-	// printf("diff = %lf\n", ray_diff);
 	dist = all->ray->ray_length * cos(ray_diff);
 	all->ray->wall_height = WINDOW_Y / dist;
 	all->ray->wall_top = WINDOW_Y / 2 - all->ray->wall_height / 2;
 	all->ray->wall_bottom = WINDOW_Y / 2 + all->ray->wall_height / 2;
-	// if (all->ray->wall_top < 0)
-	// 	all->ray->wall_top = 0;
-	// if (all->ray->wall_bottom >= WINDOW_Y)
-	// 	all->ray->wall_bottom = 0;
-	// x = fmod
 	y = 0;
 	while (y < all->ray->wall_height)
 	{
-		// color = texture_color(all, y, dist);
-		// printf("x = %d\n", WINDOW_X - i);
-		// printf("y = %lf\n\n", all->ray->wall_bottom - y);
-		// if (y > WINDOW_Y - 1)
-		// {
-		// 	// printf("went out of bounce with y\n");
-		// 	return ;
-		// }
-		if (all->ray->wall_top + y >= 0 && all->ray->wall_top + y < WINDOW_Y - 1)
+		if (all->ray->wall_top + y >= 0 && all->ray->wall_top + y < WINDOW_Y
+			- 1)
 		{
-			color = texture_color(all, y, dist);
-			mlx_put_pixel(all->game->image, WINDOW_X - i, all->ray->wall_top + y , color);
+			color = texture_color(all, y);
+			mlx_put_pixel(all->game->image, WINDOW_X - i, all->ray->wall_top
+				+ y, color);
 		}
 		y++;
 	}
-
-
-
-	
 }
 
-uint32_t	texture_color(t_all *all, int tex_y, double dist)
+uint32_t	texture_color(t_all *all, int tex_y)
 {
 	uint32_t	color;
 	int			index;
 	int			tex_x;
-	// int			offset;
-	dist = 0;
 
-
+	tex_x = 0;
 	if (all->ray->axis == 'y')
 		tex_x = all->ray->ray_x;
 	if (all->ray->axis == 'x')
 		tex_x = all->ray->ray_y;
-	// printf("axis = %c\n\n", all->ray->axis);
-	// if (dist < 1)
-		// offset = (tex_y - WINDOW_Y / 2) + all->ray->texture->height / 2;
-		// tex_y += abs((int)all->ray->wall_top);
 	tex_y = tex_y / all->ray->wall_height * all->ray->texture->height;
 	index = (all->ray->texture->width * tex_y + tex_x) * 4;
 	color = 0;
@@ -122,28 +90,7 @@ uint32_t	texture_color(t_all *all, int tex_y, double dist)
 	color += all->ray->texture->pixels[index + 2] << 8;
 	color += 255;
 	return (color);
-	
-	
-	
 }
-
-void	draw_ray(t_all *all)
-{
-	int	i;
-	double	x;
-	double	y;
-
-	i = 0;
-	calculate_ray(all);
-	while (i < all->ray->ray_length * BLOCK)
-	{
-		x = all->game->px * BLOCK + (all->game->dirx * i);
-		y = all->game->py * BLOCK + (all->game->diry * i); 
-		mlx_put_pixel(all->game->image, x, y, 0xFF0000FF);
-		i++;
-	}
-}
-
 
 void	calculate_ray(t_all *all)
 {
@@ -159,7 +106,7 @@ void	calculate_ray(t_all *all)
 	ray_end_ypos(all);
 }
 
-void assign_ray(t_all *all, int id, char axis)
+void	assign_ray(t_all *all, int id, char axis)
 {
 	if (id == 1)
 	{
@@ -186,3 +133,22 @@ void assign_ray(t_all *all, int id, char axis)
 	if (id == 2)
 		all->ray->valid_ray = false;
 }
+
+// draw ray for minimap:
+
+// void	draw_ray(t_all *all)
+// {
+// 	int	i;
+// 	double	x;
+// 	double	y;
+
+// 	i = 0;
+// 	calculate_ray(all);
+// 	while (i < all->ray->ray_length * BLOCK)
+// 	{
+// 		x = all->game->px * BLOCK + (all->game->dirx * i);
+// 		y = all->game->py * BLOCK + (all->game->diry * i);
+// 		mlx_put_pixel(all->game->image, x, y, 0xFF0000FF);
+// 		i++;
+// 	}
+// }

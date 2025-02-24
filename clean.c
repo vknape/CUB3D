@@ -1,31 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 14:25:38 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/16 13:10:06 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   clean.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/07 14:25:38 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/02/24 11:40:25 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-//Main function for cleaning and exiting the program
+// Main function for cleaning and exiting the program
 
 void	clean_all(t_all *all, int status)
 {
-	printf("map height %d\n", all->parse->map_height);
-	printf("map width: %d\n", all->parse->map_width);
-
-	clean_parse(all);
+	if (all->parse)
+		clean_parse(all);
+	if (all->texture)
+		clean_texture(all);
 	if (all->game)
-		free(all->game);
+		clean_game(all);
+	if (all->ray)
+		free(all->ray);
 	if (all)
 		free(all);
-	printf("exit %d\n", status);
 	exit(status);
+}
+
+void	clean_game(t_all *all)
+{
+	if(all->game->window)
+		mlx_terminate(all->game->window);
+	if(all->game->image)
+		mlx_delete_image(all->game->window, all->game->image);
+	free(all->game);
+}
+
+void	clean_texture(t_all *all)
+{
+	if(all->texture->north)
+		mlx_delete_texture(all->texture->north);
+	if(all->texture->south)
+		mlx_delete_texture(all->texture->south);
+	if(all->texture->east)
+		mlx_delete_texture(all->texture->east);
+	if(all->texture->west)
+		mlx_delete_texture(all->texture->west);
+	free(all->texture);
 }
 
 void	clean_parse(t_all *all)

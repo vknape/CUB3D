@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 15:10:36 by snijhuis          #+#    #+#             */
-/*   Updated: 2025/01/16 14:47:00 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_map.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/09 15:10:36 by snijhuis      #+#    #+#                 */
+/*   Updated: 2025/02/24 11:44:08 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-//Allocates 2d array and stores each character from the map part of the
-//file on an individual index
+// Allocates 2d array and stores each character from the map part of the
+// file on an individual index
 
 void	parse_map(t_all *all)
 {
@@ -34,30 +34,7 @@ void	parse_map(t_all *all)
 	return ;
 }
 
-//Print for testing
-void	print_map(t_all *all)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-
-	while (all->parse->map[j])
-	{
-		while (all->parse->map[j][i])
-		{
-			printf("%c", all->parse->map[j][i]);
-			i++;
-		}
-		printf("\n");
-		i = 0;
-		j++;
-	}
-}
-
-//Reads file, skips lines till map start
-
+// Reads file, skips lines till map start
 void	read_map(t_all *all)
 {
 	int	i;
@@ -80,12 +57,10 @@ void	read_map(t_all *all)
 		i++;
 		j++;
 	}
-	print_map(all);
 }
 
-//Reads one line and parses info into associated row in 2d array
-//Parses player location as if ground but stores player coordinates
-
+// Reads one line and parses info into associated row in 2d array
+// Parses player location as if ground but stores player coordinates
 void	fill_row(t_all *all, int j)
 {
 	int	i;
@@ -111,5 +86,24 @@ void	fill_row(t_all *all, int j)
 	}
 }
 
+// Print for testing
+// void	print_map(t_all *all)
+// {
+// 	int	i;
+// 	int	j;
 
+// 	i = 0;
+// 	j = 0;
 
+// 	while (all->parse->map[j])
+// 	{
+// 		while (all->parse->map[j][i])
+// 		{
+// 			printf("%c", all->parse->map[j][i]);
+// 			i++;
+// 		}
+// 		printf("\n");
+// 		i = 0;
+// 		j++;
+// 	}
+// }

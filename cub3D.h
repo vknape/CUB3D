@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
-/*   Updated: 2025/02/20 14:49:22 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
+/*   Updated: 2025/02/24 11:26:26 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,8 @@ void				ray_ypos_loop (t_all *all);
 void				render_line(t_all *all, int i, double dir);
 void 				load_textures (t_all *all);
 void				scale_texture (t_all *all);
-uint32_t			texture_color(t_all *all, int tex_y, double dist);
+uint32_t			texture_color(t_all *all, int tex_y);
+void				clean_texture(t_all *all);
+void				clean_game(t_all *all);
 
 #endif
