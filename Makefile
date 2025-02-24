@@ -16,12 +16,12 @@ SRC			=		clean.c\
 OBJ			=		$(SRC:.c=.o)
 CC			=		gcc
 FLAGS		=		-g -O3 -ofast
-FLAGS		+=		-Wall -Wextra -Werror
+# FLAGS		+=		-Wall -Wextra -Werror
 # FLAGS		+=		-fsanitize=thread
 # FLAGS		+=		-fsanitize=address
 MLX42		=		MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 LIBFT 		=		./libft/libft.a
-ARGS		=		
+ARGS		=		map.cub
 
 all:	libmlx	$(NAME)
 
@@ -56,7 +56,7 @@ build:
 run:		all
 				@./$(NAME) $(ARGS)
 #				@bash ./test.sh
-#				@valgrind --leak-check=full ./$(NAME) $(ARGS)
+				# @valgrind --leak-check=full ./$(NAME) $(ARGS)
 
 
 .PHONY:		all clean fclean re libmlx build

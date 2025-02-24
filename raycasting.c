@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 11:58:47 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 15:25:37 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	ft_raydir(void *param)
 		all->game->p_or = dir;
 		all->game->dirx = cos(dir);
 		all->game->diry = -sin(dir);
+		// draw_ray(all);
 		render_line(all, i, or);
 		i++;
 	}
+	printf("----------------------\n\n\n\n");
 	all->game->p_or = or ;
 	all->print = false;
 }
@@ -53,7 +55,9 @@ void	render_line(t_all *all, int i, double dir)
 	all->ray->ray_y = (all->ray->ray_y - floor(all->ray->ray_y))
 		* all->ray->texture->width;
 	ray_diff = dir - all->game->p_or;
+	
 	dist = all->ray->ray_length * cos(ray_diff);
+	printf("ray_diff %lf\n", cos(ray_diff));
 	all->ray->wall_height = WINDOW_Y / dist;
 	all->ray->wall_top = WINDOW_Y / 2 - all->ray->wall_height / 2;
 	all->ray->wall_bottom = WINDOW_Y / 2 + all->ray->wall_height / 2;
@@ -136,19 +140,19 @@ void	assign_ray(t_all *all, int id, char axis)
 
 // draw ray for minimap:
 
-// void	draw_ray(t_all *all)
-// {
-// 	int	i;
-// 	double	x;
-// 	double	y;
+void	draw_ray(t_all *all)
+{
+	int	i;
+	double	x;
+	double	y;
 
-// 	i = 0;
-// 	calculate_ray(all);
-// 	while (i < all->ray->ray_length * BLOCK)
-// 	{
-// 		x = all->game->px * BLOCK + (all->game->dirx * i);
-// 		y = all->game->py * BLOCK + (all->game->diry * i);
-// 		mlx_put_pixel(all->game->image, x, y, 0xFF0000FF);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	calculate_ray(all);
+	while (i < all->ray->ray_length * BLOCK)
+	{
+		x = all->game->px * BLOCK + (all->game->dirx * i);
+		y = all->game->py * BLOCK + (all->game->diry * i);
+		mlx_put_pixel(all->game->image, x, y, 0xFF0000FF);
+		i++;
+	}
+}

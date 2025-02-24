@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/09 15:01:07 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 12:03:32 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 13:32:32 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	check_invalid(t_all *all)
 			|| all->parse->line[i] == 'W' || all->parse->line[i] == 'E')
 		{
 			if (all->parse->orientation != 0)
-			{
-				printf("wrong\n");
 				clean_all(all, 0);
-			}
 			all->parse->orientation = all->parse->line[i];
 		}
 		i++;

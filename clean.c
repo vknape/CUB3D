@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 14:25:38 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 11:40:25 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 13:43:34 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	clean_all(t_all *all, int status)
 {
+	printf("cleaning all with: %d\n", status);
 	if (all->parse)
 		clean_parse(all);
 	if (all->texture)

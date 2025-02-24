@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 13:06:42 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 11:48:32 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 13:46:21 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	parse(t_all *all, char **argv)
 	if (all->parse->orientation == 'W')
 		all->game->p_or = pi;
 	if (all->parse->orientation == 'S')
-		all->game->p_or = 1.5 * pi;
+		all->game->p_or = 1.5 * pi;	
 }
 
 // Iterates over each line in the file until all elements have been found
@@ -52,6 +52,7 @@ void	check_file(t_all *all)
 		all->parse->map_start++;
 		if (check_element1(all) == 0)
 			free(all->parse->line);
+		
 		all->parse->line = get_next_line(all->parse->fd_cub);
 	}
 	if (!all->parse->line)

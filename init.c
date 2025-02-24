@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/07 13:11:12 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 11:15:54 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 14:00:52 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	init_struct(t_all **all)
 
 void	load_textures(t_all *all)
 {
-	all->parse->north = ft_strtrim(all->parse->north, "\n");
-	all->parse->south = ft_strtrim(all->parse->south, "\n");
-	all->parse->east = ft_strtrim(all->parse->east, "\n");
-	all->parse->west = ft_strtrim(all->parse->west, "\n");
+	substr_textures(all);
 	all->texture->north = mlx_load_png(all->parse->north + 3);
 	if (!all->texture->north)
 		clean_all(all, 20);
@@ -52,6 +49,24 @@ void	load_textures(t_all *all)
 	if (!all->texture->west)
 		clean_all(all, 18);
 	scale_texture(all);
+}
+
+void	substr_textures(t_all *all)
+{
+	char	*temp;
+
+	temp = all->parse->north;
+	all->parse->north = ft_strtrim(temp, "\n");
+	free(temp);
+	temp = all->parse->south;
+	all->parse->south = ft_strtrim(temp, "\n");
+	free(temp);
+	temp = all->parse->east;
+	all->parse->east = ft_strtrim(temp, "\n");
+	free(temp);
+	temp = all->parse->west;
+	all->parse->west = ft_strtrim(temp, "\n");
+	free(temp);
 }
 
 void	scale_texture(t_all *all)

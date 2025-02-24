@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 13:43:26 by vknape            #+#    #+#             */
-/*   Updated: 2025/02/20 14:33:01 by vknape           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vknape <vknape@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
+/*   Updated: 2025/02/24 13:49:15 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ void	start_game(t_all *all)
 	// mlx_key_hook(all->game->window, &my_keyhook, all);
 	mlx_loop_hook(all->game->window, ft_raydir, all);
 	mlx_loop(all->game->window);
-	(void)all;
 	return ;
 }

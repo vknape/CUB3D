@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/09 13:00:10 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 12:01:44 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 13:35:37 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_keys(void *param)
 	if (mlx_is_key_down(all->game->window, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(all->game->window);
-		clean_all(all, 0);
+		clean_all(all, 99);
 	}
 	if (mlx_is_key_down(all->game->window, MLX_KEY_W))
 	{

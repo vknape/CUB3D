@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/24 11:26:26 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/24 15:10:46 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WINDOW_X 1920
 # define WINDOW_Y 1080
 # define pi 3.141592653589793
-# define fov pi / 2
+# define fov pi / 2.0
 # define BLOCK 64.0
 # define STEP 5.0 / BLOCK
 
@@ -157,5 +157,6 @@ void				scale_texture (t_all *all);
 uint32_t			texture_color(t_all *all, int tex_y);
 void				clean_texture(t_all *all);
 void				clean_game(t_all *all);
+void				substr_textures(t_all *all);
 
 #endif
