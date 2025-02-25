@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/24 15:10:46 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/25 17:01:09 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define fov pi / 2.0
 # define BLOCK 64.0
 # define STEP 5.0 / BLOCK
+# define MINI_BLOCK 24.0
+# define MINI_LIMITS 15
 
 enum				e_elem
 {
@@ -61,6 +63,8 @@ typedef struct s_parse
 	char			*east;
 	char			*floor;
 	char			*ceiling;
+	uint32_t		hex_floor;
+	uint32_t		hex_ceiling;
 	int				map_width;
 	int				map_height;
 	char			orientation;
@@ -140,10 +144,10 @@ void				check_colour(t_all *all);
 void				check_texture(t_all *all);
 void				trim_texture(t_all *all);
 void				draw_ray(t_all *all);
-void				ft_raydir(void *param);
+void				ft_raydir(t_all *all);
 void				ft_keys(void *param);
 void				my_keyhook(mlx_key_data_t keydata, void *param);
-void				ft_hook(void *param);
+void				ft_print(void *param);
 void				wall_collision(t_all *all);
 void				ray_end_xpos(t_all *all);
 void				ray_end_ypos(t_all *all);
@@ -158,5 +162,12 @@ uint32_t			texture_color(t_all *all, int tex_y);
 void				clean_texture(t_all *all);
 void				clean_game(t_all *all);
 void				substr_textures(t_all *all);
+void				print_background(t_all *all);
+void				print_player(t_all *all);
+void				print_mini_map(t_all *all, int i, int j, int offset_i, int offset_j);
+uint32_t			color_mini(t_all *all, int i, int j, int offset_i, int offset_j);
+uint32_t			color_to_hex(t_all *all, char *color);
+void				free_split (char **str);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/24 13:49:15 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/25 17:03:33 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,47 @@ int	main(int argc, char **argv)
 		return (printf("Invalid amount of arguments, only 1 allowed."));
 	init_struct(&all);
 	parse(all, argv);
+	//test voor color convertion (moeten nog checken hoe we dit willen opslaan en waar we het willen doen):
+	all->parse->hex_ceiling = color_to_hex(all, all->parse->ceiling);
+	all->parse->hex_floor = color_to_hex(all, all->parse->floor);
 	start_game(all);
 	clean_all(all, 0);
 	return (0);
+}
+
+uint32_t color_to_hex(t_all *all, char *color)
+{
+	char **temp;
+	char **nums;
+	uint32_t hex_color;
+
+	temp = ft_split(color, ' ');
+	if(!temp)
+		clean_all(all, 0);
+	nums = ft_split(temp[1], ',');
+	if(!nums)
+	{
+		free_split(temp);
+		clean_all(all, 0);
+	}
+	hex_color = (0xFF << 24) | (ft_atoi(nums[0]) << 16) | (ft_atoi(nums[1]) << 8) | ft_atoi(nums[2]); //RGBA
+	// hex_color = (ft_atoi(nums[0]) << 16) | (ft_atoi(nums[1]) << 8) | ft_atoi(nums[2]); //RGB
+	free_split(temp);
+	free_split(nums);
+	return(hex_color);
+}
+
+void free_split (char **str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		free(str[i]);
+		i ++;
+	}
+	free(str);
 }
 
 void	start_game(t_all *all)
@@ -37,10 +75,10 @@ void	start_game(t_all *all)
 	load_textures(all);
 	all->print = true;
 	mlx_image_to_window(all->game->window, all->game->image, 0, 0);
-	mlx_loop_hook(all->game->window, ft_hook, all);
+	mlx_loop_hook(all->game->window, ft_print, all);
 	mlx_loop_hook(all->game->window, ft_keys, all);
 	// mlx_key_hook(all->game->window, &my_keyhook, all);
-	mlx_loop_hook(all->game->window, ft_raydir, all);
+	// mlx_loop_hook(all->game->window, ft_raydir, all);
 	mlx_loop(all->game->window);
 	return ;
 }

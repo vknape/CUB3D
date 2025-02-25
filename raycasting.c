@@ -6,20 +6,18 @@
 /*   By: vknape <vknape@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 13:19:14 by snijhuis      #+#    #+#                 */
-/*   Updated: 2025/02/24 15:25:37 by snijhuis      ########   odam.nl         */
+/*   Updated: 2025/02/25 13:24:55 by snijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	ft_raydir(void *param)
+void	ft_raydir(t_all *all)
 {
-	t_all	*all;
 	double	dir;
 	int		i;
 	double	or;
 
-	all = param;
 	dir = all->game->p_or - fov / 2;
 	or = all->game->p_or;
 	i = 0;
@@ -37,7 +35,6 @@ void	ft_raydir(void *param)
 		render_line(all, i, or);
 		i++;
 	}
-	printf("----------------------\n\n\n\n");
 	all->game->p_or = or ;
 	all->print = false;
 }
@@ -57,7 +54,6 @@ void	render_line(t_all *all, int i, double dir)
 	ray_diff = dir - all->game->p_or;
 	
 	dist = all->ray->ray_length * cos(ray_diff);
-	printf("ray_diff %lf\n", cos(ray_diff));
 	all->ray->wall_height = WINDOW_Y / dist;
 	all->ray->wall_top = WINDOW_Y / 2 - all->ray->wall_height / 2;
 	all->ray->wall_bottom = WINDOW_Y / 2 + all->ray->wall_height / 2;
