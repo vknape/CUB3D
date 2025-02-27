@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/06 13:43:26 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/25 17:03:33 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 13:43:26 by vknape            #+#    #+#             */
+/*   Updated: 2025/02/27 11:06:00 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ uint32_t color_to_hex(t_all *all, char *color)
 		free_split(temp);
 		clean_all(all, 0);
 	}
-	hex_color = (0xFF << 24) | (ft_atoi(nums[0]) << 16) | (ft_atoi(nums[1]) << 8) | ft_atoi(nums[2]); //RGBA
+	hex_color = (ft_atoi(nums[0]) << 24) | (ft_atoi(nums[1]) << 16) | (ft_atoi(nums[2]) << 8) | 255; //RGBA
 	// hex_color = (ft_atoi(nums[0]) << 16) | (ft_atoi(nums[1]) << 8) | ft_atoi(nums[2]); //RGB
 	free_split(temp);
 	free_split(nums);

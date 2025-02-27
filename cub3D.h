@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vknape <vknape@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/06 13:50:55 by vknape        #+#    #+#                 */
-/*   Updated: 2025/02/25 17:01:09 by snijhuis      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vknape <vknape@student.codam.nl>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 13:50:55 by vknape            #+#    #+#             */
+/*   Updated: 2025/02/27 15:04:11 by vknape           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define BLOCK 64.0
 # define STEP 5.0 / BLOCK
 # define MINI_BLOCK 24.0
-# define MINI_LIMITS 15
+# define MINI_LIMITS 10.0
 
 enum				e_elem
 {
@@ -163,7 +163,7 @@ void				clean_texture(t_all *all);
 void				clean_game(t_all *all);
 void				substr_textures(t_all *all);
 void				print_background(t_all *all);
-void				print_player(t_all *all);
+void				print_player(t_all *all, int limit_x, int limit_y);
 void				print_mini_map(t_all *all, int i, int j, int offset_i, int offset_j);
 uint32_t			color_mini(t_all *all, int i, int j, int offset_i, int offset_j);
 uint32_t			color_to_hex(t_all *all, char *color);
